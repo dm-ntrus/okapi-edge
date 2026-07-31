@@ -1,0 +1,54 @@
+A — Forêt Okapi (recommandée)
+Ambiance sombre mais chaude, plus “animal / Afrique” que “tech noir”.
+
+Rôle	Hex	Inspiration
+Fond
+#1A1410
+robe sombre / ombre forêt
+Surface
+#241C16
+brun châtain
+Bordures
+brun clair transparent
+Texte
+#F5F0E8
+ivoire des rayures
+Accent
+#C4A574
+beige-or des pattes
+Accent fort
+#E8DCC8
+crème
+Effet : élégant, premium, moins “écran noir”. Garde un look tech sans le froid du noir.
+
+B — Clair Savane
+Mode clair : fond crème, accents brun okapi.
+
+Rôle	Hex
+Fond
+#F7F2EA
+Surface
+#FFFFFF / #EFE8DC
+Texte
+#2A211C
+Accent
+#8B5E3C (châtain)
+Accent fort
+#5C3D2E
+Effet : très “marque okapi”, lisible, chaleureux. Changement plus radical (passage clair).
+
+C — Hybride espresso + cyan discret
+Garde un peu l’identité actuelle (cyan) mais remplace le noir.
+
+Rôle	Hex
+Fond
+#161210
+Surface
+#211A15
+Texte
+#F3EEE6
+Accent
+#2DD4BF (teal doux, pas cyan flashy)
+Secondaire
+#B8956C (or okapi)
+Effet : transition douce depuis aujourd’hui, moins de rupture.
