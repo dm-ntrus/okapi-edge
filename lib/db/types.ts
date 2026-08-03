@@ -85,6 +85,42 @@ export type ProductRecord = {
 export type InquiryKind = 'b2b' | 'investor' | 'newsletter' | 'career' | 'contact';
 export type InquiryStatus = 'new' | 'in_progress' | 'closed';
 
+export type TeamRecord = {
+  id: string;
+  locale: ContentLocale;
+  key: string;
+  name: string;
+  role: string;
+  bio: string;
+  image?: string | null;
+  linkedin?: string | null;
+  twitter?: string | null;
+  sort_order: number;
+  published: boolean;
+  created_at?: string;
+  updated_at?: string;
+};
+
+export type SettingRecord = {
+  id: string;
+  key: string;
+  value: Record<string, unknown>;
+  updated_at?: string;
+};
+
+/** Normalized public contact / HQ payload (locale-resolved). */
+export type SiteContactInfo = {
+  email: string;
+  phone: string;
+  locationShort: string;
+  salesEmail: string;
+  pressEmail: string;
+  securityEmail: string;
+  hqTitle: string;
+  addressLine1: string;
+  addressLine2: string;
+};
+
 export type InquiryRecord = {
   id: string;
   kind: InquiryKind;

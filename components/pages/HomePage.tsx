@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, type ReactNode } from 'react';
-import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/lib/i18n/navigation';
+import { InteractiveRdcMap } from '@/components/home/InteractiveRdcMap';
 import { SaasInteractiveDemo } from '@/components/home/SaasInteractiveDemo';
 import { Button, ButtonLink } from '@/components/ui/Button';
 import { Container, Section, SectionHeading } from '@/components/ui/Section';
@@ -27,11 +27,6 @@ import {
   Database,
 } from 'lucide-react';
 
-const InteractiveRdcMap = dynamic(
-  () => import('@/components/home/InteractiveRdcMap').then((m) => m.InteractiveRdcMap),
-  { ssr: false, loading: () => <div className="absolute inset-0 bg-[var(--oe-bg)]" /> },
-);
-
 interface HomePageProps {
   onOpenInvestorsModal?: () => void;
   products?: SaasProduct[];
@@ -54,7 +49,8 @@ const PRODUCT_ICONS: Record<string, ReactNode> = {
 
 export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps) {
   const t = useTranslations();
-  const [activeTechTab, setActiveTechTab] = useState<(typeof TECH_TABS)[number]['id']>('rust');
+  const th = useTranslations('home');
+  const tc = useTranslations('common');
   const [b2bFormData, setB2bFormData] = useState({
     name: '',
     organization: '',
@@ -63,8 +59,32 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
   });
   const [b2bSubmitted, setB2bSubmitted] = useState(false);
 
-  const activeTech = TECH_TABS.find((tab) => tab.id === activeTechTab) ?? TECH_TABS[0];
-  const ActiveIcon = activeTech.icon;
+  const techMetrics = {
+    rust: [
+      ['< 2 ms', 'responseTime'],
+      ['99.999%', 'availability'],
+      ['−65%', 'footprint'],
+      ['Multi-OS', 'compatibility'],
+    ],
+    crdt: [
+      ['0%', 'dataLoss'],
+      ['Illimitée', 'offlineAutonomy'],
+      ['−90%', 'bandwidth'],
+      ['Distribuée', 'architecture'],
+    ],
+    zerotrust: [
+      ['AES-256', 'encryption'],
+      ['100%', 'compliance'],
+      ['Enclave', 'isolation'],
+      ['Zero-Trust', 'access'],
+    ],
+    ai: [
+      ['< 15 ms', 'decision'],
+      ['In-situ', 'privacy'],
+      ['98.4%', 'precision'],
+      ['Locale', 'inference'],
+    ],
+  } as const;
 
   const handleB2bSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,7 +98,7 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
       interest: 'home-b2b',
     });
     if (!result.ok) {
-      alert(result.error ?? 'Envoi impossible');
+      alert(result.error ?? tc('errors.sendFailed'));
       return;
     }
     setB2bSubmitted(true);
@@ -90,33 +110,32 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
 
   return (
     <div className="w-full bg-[var(--oe-bg)]">
-      {/* Hero — headline + CTA over full-bleed map */}
-      <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden border-b border-[var(--oe-border)]">
+      {/* Hero */}
+      <section className="oe-hero relative isolate flex min-h-[calc(100svh-3.5rem)] items-center justify-center overflow-hidden border-b border-[var(--oe-border)] sm:min-h-[calc(100svh-4.25rem)]">
         <InteractiveRdcMap />
-        <div className="absolute inset-0 oe-hero-veil pointer-events-none" />
-        <div className="absolute inset-0 oe-grid-fade pointer-events-none opacity-40" />
+        <div className="oe-hero-veil pointer-events-none absolute inset-0 z-[1]" />
 
-        <Container className="relative z-10 w-full py-24 sm:py-28 md:py-32">
-          <div className="mx-auto max-w-3xl text-center px-1">
-            <h1 className="oe-fade-up font-heading text-[1.875rem] leading-[1.12] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-semibold tracking-tight text-[var(--oe-text)] text-balance drop-shadow-[0_2px_28px_rgba(0,0,0,0.55)]">
-              {t('hero_title_part1')}
-              <span className="block mt-2 oe-gradient-text">{t('hero_title_part2')}</span>
+        <Container className="relative z-10 w-full min-w-0 py-16 sm:py-24 md:py-32">
+          <div className="mx-auto flex max-w-3xl min-w-0 flex-col items-center gap-6 text-center sm:gap-8">
+            <h1 className="oe-fade-up font-heading text-[1.875rem] leading-[1.12] font-semibold tracking-tight text-balance text-[var(--oe-text)] sm:text-5xl sm:leading-[1.08] md:text-6xl lg:text-[4.25rem]">
+              <span className="block">{t('hero_title_part1')}</span>
+              <span className="mt-2 block oe-gradient-text sm:mt-3">{t('hero_title_part2')}</span>
             </h1>
 
-            <p className="oe-fade-up-delay mx-auto mt-5 sm:mt-6 max-w-xl text-sm sm:text-base md:text-lg text-[var(--oe-text-secondary)] leading-relaxed drop-shadow-[0_1px_16px_rgba(0,0,0,0.45)]">
+            <p className="oe-fade-up-delay mx-auto max-w-xl text-[0.9375rem] leading-relaxed text-[var(--oe-text-secondary)] sm:text-base md:text-lg">
               {t('hero_subtitle')}
             </p>
 
-            <div className="oe-fade-up-delay-2 mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full sm:w-auto max-w-md sm:max-w-none mx-auto">
+            <div className="oe-fade-up-delay-2 flex w-full max-w-sm flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
               <ButtonLink href="/ecosystem" size="lg" className="w-full sm:w-auto">
                 {t('hero_cta_ecosystem')}
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 shrink-0" />
               </ButtonLink>
               <ButtonLink
                 href="/contact"
                 variant="secondary"
                 size="lg"
-                className="w-full sm:w-auto bg-[var(--oe-surface)]/70 backdrop-blur-md border-[var(--oe-border-strong)]"
+                className="w-full border-[var(--oe-border-strong)] bg-[var(--oe-surface)]/70 backdrop-blur-md sm:w-auto"
               >
                 {t('hero_cta_contact')}
               </ButtonLink>
@@ -125,93 +144,86 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
         </Container>
       </section>
 
-      {/* Engineering */}
+      {/* Engineering — native radios so mobile taps work without React onClick */}
       <Section className="bg-[var(--oe-bg)]">
         <Container>
           <SectionHeading
-            eyebrow="Architecture"
+            eyebrow={th('techCore.eyebrow')}
             title={t('tech_core_title')}
             description={t('tech_core_subtitle')}
           />
 
-          <div className="-mx-4 px-4 sm:mx-0 sm:px-0 mb-8 sm:mb-10">
-            <div className="oe-scroll-x sm:flex-wrap sm:overflow-visible sm:justify-center">
-              {TECH_TABS.map((tab) => {
-                const Icon = tab.icon;
-                const active = activeTechTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    onClick={() => setActiveTechTab(tab.id)}
-                    className={`oe-tap inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors duration-200 border whitespace-nowrap ${
-                      active
-                        ? 'border-[var(--oe-accent)]/40 bg-[var(--oe-accent-soft)] text-[var(--oe-accent-strong)]'
-                        : 'border-[var(--oe-border)] text-[var(--oe-text-secondary)] hover:text-[var(--oe-text)] hover:border-[var(--oe-border-strong)]'
-                    }`}
-                  >
-                    <Icon className="h-3.5 w-3.5 shrink-0" />
-                    <span className="font-medium">{t(tab.titleKey)}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <div className="oe-tech-tabs">
+            {TECH_TABS.map((tab, index) => (
+              <input
+                key={`input-${tab.id}`}
+                type="radio"
+                name="oe-tech-core"
+                id={`oe-tech-${tab.id}`}
+                value={tab.id}
+                defaultChecked={index === 0}
+                className="oe-native-toggle"
+              />
+            ))}
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-8 md:p-10">
-            <div>
-              <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--oe-accent-soft)] text-[var(--oe-accent)]">
-                <ActiveIcon className="h-5 w-5" />
+            <div className="mb-8 sm:mb-10">
+              <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label={t('tech_core_title')}>
+                {TECH_TABS.map((tab) => {
+                  const Icon = tab.icon;
+                  return (
+                    <label
+                      key={tab.id}
+                      htmlFor={`oe-tech-${tab.id}`}
+                      className="oe-tech-tab oe-tap inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors duration-200 hover:border-[var(--oe-border-strong)] hover:text-[var(--oe-text)]"
+                    >
+                      <Icon className="h-3.5 w-3.5 shrink-0 pointer-events-none" />
+                      <span className="font-medium">{t(tab.titleKey)}</span>
+                    </label>
+                  );
+                })}
               </div>
-              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-[var(--oe-text)] tracking-tight mb-3">
-                {t(activeTech.titleKey)}
-              </h3>
-              <p className="text-sm sm:text-base text-[var(--oe-text-secondary)] leading-relaxed">
-                {t(activeTech.descKey)}
-              </p>
             </div>
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-              {(
-                {
-                  rust: [
-                    ['< 2 ms', 'Temps de réponse'],
-                    ['99.999%', 'Disponibilité'],
-                    ['−65%', 'Empreinte système'],
-                    ['Multi-OS', 'Compatibilité'],
-                  ],
-                  crdt: [
-                    ['0%', 'Pertes de données'],
-                    ['Illimitée', 'Autonomie offline'],
-                    ['−90%', 'Bande passante'],
-                    ['Distribuée', 'Architecture'],
-                  ],
-                  zerotrust: [
-                    ['AES-256', 'Chiffrement'],
-                    ['100%', 'Conformité'],
-                    ['Enclave', 'Isolation'],
-                    ['Zero-Trust', 'Accès'],
-                  ],
-                  ai: [
-                    ['< 15 ms', 'Décision'],
-                    ['In-situ', 'Confidentialité'],
-                    ['98.4%', 'Précision'],
-                    ['Locale', 'Inférence'],
-                  ],
-                } as const
-              )[activeTechTab].map(([value, label]) => (
+
+            {TECH_TABS.map((tab) => {
+              const Icon = tab.icon;
+              const metrics = techMetrics[tab.id];
+              return (
                 <div
-                  key={label}
-                  className="rounded-[var(--oe-radius)] border border-[var(--oe-border)] bg-[var(--oe-bg)]/60 p-3 sm:p-4"
+                  key={tab.id}
+                  data-tech={tab.id}
+                  className="oe-tech-panel lg:grid-cols-2 gap-8 lg:gap-16 items-start rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-8 md:p-10"
                 >
-                  <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--oe-text-muted)]">
-                    {label}
+                  <div>
+                    <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--oe-accent-soft)] text-[var(--oe-accent)]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-heading text-xl sm:text-2xl font-semibold text-[var(--oe-text)] tracking-tight mb-3">
+                      {t(tab.titleKey)}
+                    </h3>
+                    <p className="text-sm sm:text-base text-[var(--oe-text-secondary)] leading-relaxed">
+                      {t(tab.descKey)}
+                    </p>
                   </div>
-                  <div className="mt-1.5 sm:mt-2 font-heading text-lg sm:text-xl font-semibold text-[var(--oe-text)]">
-                    {value}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                    {metrics.map(([value, labelKey]) => (
+                      <div
+                        key={labelKey}
+                        className="rounded-[var(--oe-radius)] border border-[var(--oe-border)] bg-[var(--oe-bg)]/60 p-3 sm:p-4"
+                      >
+                        <div className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--oe-text-muted)]">
+                          {th(
+                            `techCore.metrics.${tab.id}.${labelKey}` as 'techCore.metrics.rust.responseTime',
+                          )}
+                        </div>
+                        <div className="mt-1.5 sm:mt-2 font-heading text-lg sm:text-xl font-semibold text-[var(--oe-text)]">
+                          {value}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </Container>
       </Section>
@@ -220,7 +232,7 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
       <Section className="bg-[var(--oe-bg-elevated)]">
         <Container>
           <SectionHeading
-            eyebrow="Plateformes"
+            eyebrow={th('products.eyebrow')}
             title={t('products_title')}
             description={t('products_subtitle')}
           />
@@ -244,12 +256,12 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
       <Section className="bg-[var(--oe-bg)]">
         <Container>
           <SectionHeading
-            eyebrow="Démonstration"
-            title="Plateformes en action"
-            description="Explorez les interfaces métier conçues pour la vitesse, la résilience et la conformité."
+            eyebrow={th('demo.eyebrow')}
+            title={th('demo.title')}
+            description={th('demo.description')}
           />
           <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] overflow-x-auto">
-            <div className="min-w-[20rem]">
+            <div className="min-w-0 w-full overflow-hidden">
               <SaasInteractiveDemo />
             </div>
           </div>
@@ -259,21 +271,21 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
       {/* About strip */}
       <Section className="bg-[var(--oe-bg-elevated)]">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--oe-accent)] mb-4">
-                Groupe
+                {th('about.eyebrow')}
               </p>
-              <blockquote className="font-heading text-2xl md:text-3xl font-medium text-[var(--oe-text)] leading-snug tracking-tight">
+              <blockquote className="font-heading text-xl sm:text-2xl md:text-3xl font-medium text-[var(--oe-text)] leading-snug tracking-tight">
                 {t('about_quote')}
               </blockquote>
             </div>
             <div>
-              <h2 className="font-heading text-3xl font-semibold text-[var(--oe-text)] tracking-tight mb-4">
+              <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-[var(--oe-text)] tracking-tight mb-4">
                 {t('about_title')}
               </h2>
-              <p className="text-[var(--oe-text-secondary)] leading-relaxed mb-8">{t('about_desc')}</p>
-              <ButtonLink href="/about" variant="secondary">
+              <p className="text-sm sm:text-base text-[var(--oe-text-secondary)] leading-relaxed mb-6 sm:mb-8">{t('about_desc')}</p>
+              <ButtonLink href="/about" variant="secondary" className="w-full sm:w-auto">
                 {t('about_cta')}
                 <ArrowRight className="h-4 w-4" />
               </ButtonLink>
@@ -286,36 +298,36 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
       <Section className="bg-[var(--oe-bg)]">
         <Container>
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-8 md:p-10">
+            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-8 md:p-10">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--oe-accent)] mb-4">
                 {t('careers_badge')}
               </p>
-              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-[var(--oe-text)] tracking-tight mb-3">
+              <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-semibold text-[var(--oe-text)] tracking-tight mb-3">
                 {t('careers_title')}
               </h2>
-              <p className="text-[var(--oe-text-secondary)] leading-relaxed mb-8">{t('careers_desc')}</p>
-              <ButtonLink href="/careers" variant="secondary">
+              <p className="text-sm sm:text-base text-[var(--oe-text-secondary)] leading-relaxed mb-6 sm:mb-8">{t('careers_desc')}</p>
+              <ButtonLink href="/careers" variant="secondary" className="w-full sm:w-auto">
                 {t('careers_cta')}
                 <ArrowRight className="h-4 w-4" />
               </ButtonLink>
             </div>
-            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-8 md:p-10">
+            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-8 md:p-10">
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--oe-warning)] mb-4">
-                Investisseurs
+                {th('investors.eyebrow')}
               </p>
-              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-[var(--oe-text)] tracking-tight mb-3">
-                Partenaires stratégiques
+              <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-semibold text-[var(--oe-text)] tracking-tight mb-3">
+                {th('investors.title')}
               </h2>
-              <p className="text-[var(--oe-text-secondary)] leading-relaxed mb-8">
-                Accédez à l’espace confidentiel sous NDA pour le dossier d’investissement Okapi Edge.
+              <p className="text-sm sm:text-base text-[var(--oe-text-secondary)] leading-relaxed mb-6 sm:mb-8">
+                {th('investors.description')}
               </p>
               {onOpenInvestorsModal ? (
-                <Button variant="secondary" onClick={onOpenInvestorsModal}>
+                <Button variant="secondary" className="w-full sm:w-auto" onClick={onOpenInvestorsModal}>
                   <Lock className="h-4 w-4" />
                   {t('nav_investors')}
                 </Button>
               ) : (
-                <ButtonLink href="/investors" variant="secondary">
+                <ButtonLink href="/investors" variant="secondary" className="w-full sm:w-auto">
                   <Lock className="h-4 w-4" />
                   {t('nav_investors')}
                 </ButtonLink>
@@ -328,17 +340,17 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
       {/* B2B contact */}
       <Section className="bg-[var(--oe-bg-elevated)] border-b-0">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
             <div>
               <SectionHeading
                 align="left"
-                eyebrow="Contact"
+                eyebrow={th('contact.eyebrow')}
                 title={t('b2b_title')}
                 description={t('b2b_subtitle')}
               />
             </div>
 
-            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-6 md:p-8">
+            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-6 md:p-8">
               {b2bSubmitted ? (
                 <div className="py-10 text-center">
                   <CheckCircle2 className="mx-auto mb-4 h-10 w-10 text-[var(--oe-success)]" />
@@ -391,14 +403,14 @@ export function HomePage({ onOpenInvestorsModal, products = [] }: HomePageProps)
 
           <div className="mt-10 flex flex-wrap gap-4 text-sm text-[var(--oe-text-muted)]">
             <Link href="/ecosystem" className="oe-link inline-flex items-center gap-1">
-              Solutions <ArrowRight className="h-3.5 w-3.5" />
+              {th('footerLinks.solutions')} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <Link href="/tech-sovereignty" className="oe-link inline-flex items-center gap-1">
-              Ingénierie <ArrowRight className="h-3.5 w-3.5" />
+              {th('footerLinks.engineering')} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <span className="inline-flex items-center gap-2">
               <Server className="h-3.5 w-3.5 text-[var(--oe-accent)]" />
-              Edge infrastructure
+              {th('footerLinks.edgeInfra')}
             </span>
           </div>
         </Container>

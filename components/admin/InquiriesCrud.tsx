@@ -318,28 +318,28 @@ export function InquiriesCrud({
                     <Mail className="h-4 w-4" />
                     Répondre par e-mail
                   </Button>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     <Button
-                      size="sm"
                       variant={selected.status === 'new' ? 'default' : 'outline'}
                       disabled={pending || selected.status === 'new'}
                       onClick={() => setStatus(selected.id, 'new')}
+                      className="w-full"
                     >
                       Nouveau
                     </Button>
                     <Button
-                      size="sm"
                       variant={selected.status === 'in_progress' ? 'default' : 'outline'}
                       disabled={pending || selected.status === 'in_progress'}
                       onClick={() => setStatus(selected.id, 'in_progress')}
+                      className="w-full"
                     >
                       En cours
                     </Button>
                     <Button
-                      size="sm"
                       variant={selected.status === 'closed' ? 'default' : 'outline'}
                       disabled={pending || selected.status === 'closed'}
                       onClick={() => setStatus(selected.id, 'closed')}
+                      className="w-full"
                     >
                       Traité
                     </Button>

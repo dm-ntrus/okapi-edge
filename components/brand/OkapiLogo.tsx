@@ -1,6 +1,7 @@
 'use client';
 
 import { useId } from 'react';
+import { cn } from '@/lib/utils';
 
 interface LogoProps {
   className?: string;
@@ -18,10 +19,10 @@ export function OkapiLogo({
   const uid = useId().replace(/:/g, '');
 
   const sizeMap = {
-    sm: { icon: 32, text: 'text-base', sub: 'text-[9px]', gap: 'gap-2' },
-    md: { icon: 40, text: 'text-lg', sub: 'text-[10px]', gap: 'gap-2.5' },
-    lg: { icon: 52, text: 'text-2xl', sub: 'text-[11px]', gap: 'gap-3' },
-    xl: { icon: 72, text: 'text-3xl', sub: 'text-[12px]', gap: 'gap-3' },
+    sm: { icon: 28, text: 'text-sm', sub: 'text-[9px]', gap: 'gap-1.5' },
+    md: { icon: 36, text: 'text-base', sub: 'text-[10px]', gap: 'gap-2' },
+    lg: { icon: 48, text: 'text-xl', sub: 'text-[11px]', gap: 'gap-2.5' },
+    xl: { icon: 64, text: 'text-2xl', sub: 'text-[12px]', gap: 'gap-3' },
   };
 
   const currentSize = sizeMap[size];
@@ -30,7 +31,7 @@ export function OkapiLogo({
   const goldGrad = `okapi-gold-${uid}`;
 
   return (
-    <div className={`inline-flex items-center ${currentSize.gap} select-none ${className}`}>
+    <div className={cn('inline-flex items-center select-none max-w-full', currentSize.gap, className)}>
       <div className="relative shrink-0">
         <svg
           width={currentSize.icon}
@@ -38,7 +39,8 @@ export function OkapiLogo({
           viewBox="0 0 100 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="relative z-10 block rounded-xl bg-[#241C16] p-1 ring-1 ring-[#C4A574]/35 shadow-[0_0_0_1px_rgba(245,240,232,0.06)]"
+          className="relative z-10 block shrink-0 rounded-xl bg-[#241C16] p-1 ring-1 ring-[#C4A574]/35 shadow-[0_0_0_1px_rgba(245,240,232,0.06)] [max-width:none] [height:auto]"
+          style={{ width: currentSize.icon, height: currentSize.icon }}
           aria-hidden
         >
           <defs>
@@ -129,9 +131,9 @@ export function OkapiLogo({
       </div>
 
       {showText ? (
-        <div className="flex flex-col min-w-0">
+        <div className="flex flex-col min-w-0 overflow-hidden">
           <div
-            className={`font-heading font-semibold tracking-tight text-[var(--oe-text)] flex items-center gap-1.5 leading-none ${currentSize.text}`}
+            className={`font-heading font-semibold tracking-tight text-[var(--oe-text)] flex items-center gap-1 leading-none truncate ${currentSize.text}`}
           >
             <span>Okapi</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8DCC8] via-[#C4A574] to-[#A67C52]">

@@ -6,19 +6,27 @@ import { useLocale, useTranslations } from 'next-intl';
 import { OkapiLogo } from '@/components/brand/OkapiLogo';
 import { PRODUCT_ROUTES } from '@/lib/constants';
 import { Mail, CheckCircle2, ArrowUpRight, MapPin } from 'lucide-react';
+import type { SiteContact } from '@/types';
 
 interface FooterProps {
   onOpenInvestorsModal: () => void;
+  contact?: SiteContact | null;
 }
 
-export function Footer({ onOpenInvestorsModal }: FooterProps) {
-  const t = useTranslations();
+export function Footer({ onOpenInvestorsModal, contact }: FooterProps) {
+  const tNav = useTranslations('nav');
+  const tCommon = useTranslations('common');
+  const tFooter = useTranslations('common.footer');
+  const tNewsletter = useTranslations('common.footer.newsletter');
   const locale = useLocale();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [pendingConfirm, setPendingConfirm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const contactEmail = contact?.email || tFooter('contactEmail');
+  const locationLabel = contact?.locationShort || tFooter('location');
 
   const handleSubscribe = async (e: FormEvent) => {
     e.preventDefault();
@@ -32,7 +40,7 @@ export function Footer({ onOpenInvestorsModal }: FooterProps) {
         locale: locale === 'en' ? 'en' : 'fr',
       });
       if (!result.ok) {
-        setError(result.error ?? 'Inscription impossible');
+        setError(result.error ?? tCommon('errors.sendFailed'));
         return;
       }
       setPendingConfirm(Boolean(result.pending));
@@ -61,44 +69,46 @@ export function Footer({ onOpenInvestorsModal }: FooterProps) {
       <div className="oe-container relative pt-14 sm:pt-16 pb-8 sm:pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-14 pb-12 mb-10 border-b border-[var(--oe-border)]">
           <div>
-            <OkapiLogo size="md" showTagline={false} className="sm:hidden" />
-            <OkapiLogo size="lg" showTagline={false} className="hidden sm:inline-flex" />
+            <span className="block sm:hidden">
+              <OkapiLogo size="md" showTagline={false} />
+            </span>
+            <span className="hidden sm:block">
+              <OkapiLogo size="lg" showTagline={false} />
+            </span>
             <p className="mt-5 max-w-lg text-sm leading-relaxed text-[var(--oe-text-muted)]">
-              {t('footer_tagline')}
+              {tFooter('tagline')}
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
               <a
-                href={`mailto:${t('footer_contact_email')}`}
+                href={`mailto:${contactEmail}`}
                 className="oe-tap inline-flex min-h-10 items-center gap-2 text-[var(--oe-text-secondary)] hover:text-[var(--oe-text)] transition-colors"
               >
                 <Mail className="h-4 w-4 text-[var(--oe-accent)]" />
-                {t('footer_contact_email')}
+                {contactEmail}
               </a>
               <span className="inline-flex items-center gap-2 text-xs font-mono text-[var(--oe-text-muted)]">
                 <MapPin className="h-3.5 w-3.5 text-[var(--oe-accent)]" />
-                Kinshasa · Africa / Global
+                {locationLabel}
               </span>
             </div>
           </div>
 
           <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)]/60 p-5 sm:p-6">
             <h4 className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--oe-text-muted)]">
-              {t('footer_newsletter_title')}
+              {tNewsletter('title')}
             </h4>
             <p className="mt-2 text-sm text-[var(--oe-text-muted)] leading-relaxed">
-              {t('footer_newsletter_desc')}
+              {tNewsletter('description')}
             </p>
             {subscribed ? (
               <div className="mt-4 flex items-center gap-2 text-sm text-[var(--oe-success)]">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
-                {pendingConfirm && t.has('footer_newsletter_pending')
-                  ? t('footer_newsletter_pending')
-                  : t('footer_newsletter_success')}
+                {pendingConfirm ? tNewsletter('pending') : tNewsletter('success')}
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="mt-4 flex flex-col sm:flex-row gap-2">
                 <label className="sr-only" htmlFor="footer-newsletter-email">
-                  {t('footer_newsletter_placeholder')}
+                  {tNewsletter('placeholder')}
                 </label>
                 <input
                   id="footer-newsletter-email"
@@ -108,15 +118,15 @@ export function Footer({ onOpenInvestorsModal }: FooterProps) {
                   autoComplete="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder={t('footer_newsletter_placeholder')}
-                  className="oe-field min-h-11 flex-1 text-sm"
+                  placeholder={tNewsletter('placeholder')}
+                  className="oe-field min-h-11 flex-1"
                 />
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="oe-tap shrink-0 min-h-11 rounded-lg bg-[var(--oe-accent)] px-5 text-sm font-semibold text-[var(--oe-accent-ink)] disabled:opacity-60"
+                  className="oe-tap shrink-0 min-h-11 w-full sm:w-auto rounded-lg bg-[var(--oe-accent)] px-5 text-sm font-semibold text-[var(--oe-accent-ink)] disabled:opacity-60"
                 >
-                  {t('footer_newsletter_cta')}
+                  {tNewsletter('cta')}
                 </button>
               </form>
             )}
@@ -124,24 +134,24 @@ export function Footer({ onOpenInvestorsModal }: FooterProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
-          <FooterCol title={t('footer_col_company')}>
-            <FooterLink href="/vision">{t('nav_vision')}</FooterLink>
-            <FooterLink href="/about">{t('nav_about')}</FooterLink>
-            <FooterLink href="/tech-sovereignty">{t('nav_tech')}</FooterLink>
-            <FooterLink href="/careers">{t('nav_careers')}</FooterLink>
-            <FooterLink href="/press">{t('nav_press')}</FooterLink>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-12">
+          <FooterCol title={tFooter('colCompany')}>
+            <FooterLink href="/vision">{tNav('vision')}</FooterLink>
+            <FooterLink href="/about">{tNav('about')}</FooterLink>
+            <FooterLink href="/tech-sovereignty">{tNav('tech')}</FooterLink>
+            <FooterLink href="/careers">{tNav('careers')}</FooterLink>
+            <FooterLink href="/press">{tNav('press')}</FooterLink>
             <button
               type="button"
               onClick={onOpenInvestorsModal}
               className="oe-tap group flex min-h-10 items-center gap-1.5 text-sm text-[var(--oe-accent)] hover:text-[var(--oe-accent-strong)] transition-colors text-left"
             >
-              {t('nav_investors')}
+              {tNav('investors')}
               <ArrowUpRight className="h-3.5 w-3.5 opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
           </FooterCol>
 
-          <FooterCol title={t('footer_col_platforms')}>
+          <FooterCol title={tFooter('colPlatforms')}>
             <FooterLink href={PRODUCT_ROUTES['okapi-edu']}>Okapi Edu</FooterLink>
             <FooterLink href={PRODUCT_ROUTES['syntix-pharma']}>Syntix Pharma</FooterLink>
             <FooterLink href={PRODUCT_ROUTES['okapi-pos']}>Okapi POS</FooterLink>
@@ -149,27 +159,27 @@ export function Footer({ onOpenInvestorsModal }: FooterProps) {
             <FooterLink href={PRODUCT_ROUTES['okapi-fueloils']}>Okapi FuelOils</FooterLink>
           </FooterCol>
 
-          <FooterCol title={t('footer_resources')}>
-            <FooterLink href="/blog">{t('nav_blog')}</FooterLink>
-            <FooterLink href="/contact">{t('nav_contact')}</FooterLink>
-            <FooterLink href="/legal">{t('footer_legal')}</FooterLink>
+          <FooterCol title={tFooter('resources')}>
+            <FooterLink href="/blog">{tNav('blog')}</FooterLink>
+            <FooterLink href="/contact">{tNav('contact')}</FooterLink>
+            <FooterLink href="/legal">{tFooter('legal')}</FooterLink>
           </FooterCol>
 
           <div className="col-span-2 md:col-span-1">
             <h4 className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--oe-text-muted)] mb-3 sm:mb-4">
-              {t.has('footer_status') ? t('footer_status') : 'Statut'}
+              {tFooter('status')}
             </h4>
             <div className="inline-flex items-center gap-2 rounded-full border border-[var(--oe-border)] bg-[var(--oe-surface)] px-3 py-2 text-xs font-mono text-[var(--oe-text-muted)]">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--oe-success)] opacity-40" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--oe-success)]" />
               </span>
-              {t('footer_nodes_status')}
+              {tFooter('nodesStatus')}
             </div>
             <p className="mt-4 text-xs leading-relaxed text-[var(--oe-text-muted)]">
-              {t.has('footer_b2b_hint') ? t('footer_b2b_hint') : 'Canal partenariats & B2B via'}{' '}
+              {tFooter('b2bHint')}{' '}
               <Link href="/contact" className="text-[var(--oe-accent)] hover:underline">
-                {t('nav_contact')}
+                {tNav('contact')}
               </Link>
               .
             </p>
@@ -178,14 +188,14 @@ export function Footer({ onOpenInvestorsModal }: FooterProps) {
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-6 border-t border-[var(--oe-border)] text-xs text-[var(--oe-text-muted)]">
           <span>
-            © {new Date().getFullYear()} {t('footer_rights')}
+            © {new Date().getFullYear()} {tFooter('rights')}
           </span>
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/contact" className="oe-tap min-h-10 inline-flex items-center hover:text-[var(--oe-text)] transition-colors">
-              {t('nav_contact')}
+              {tNav('contact')}
             </Link>
             <Link href="/legal" className="oe-tap min-h-10 inline-flex items-center hover:text-[var(--oe-text)] transition-colors">
-              {t('footer_legal')}
+              {tFooter('legal')}
             </Link>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Link } from '@/lib/i18n/navigation';
+import { cn } from '@/lib/utils';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'md' | 'lg';
@@ -14,17 +15,17 @@ const variantClass: Record<Variant, string> = {
 };
 
 const sizeClass: Record<Size, string> = {
-  md: 'h-11 px-5 text-sm',
-  lg: 'h-12 px-6 text-[0.9375rem]',
+  md: 'min-h-11 h-11 px-5 text-sm',
+  lg: 'min-h-12 h-12 px-6 text-base sm:text-[0.9375rem]',
 };
 
-function baseClass(variant: Variant, size: Size, className?: string) {
-  return [
-    'inline-flex items-center justify-center gap-2 rounded-[var(--oe-radius)] font-heading font-semibold tracking-tight transition-all duration-200 ease-[var(--oe-ease)] disabled:opacity-50 disabled:pointer-events-none',
+function buttonClass(variant: Variant, size: Size, className?: string) {
+  return cn(
+    'oe-tap inline-flex items-center justify-center gap-2 rounded-[var(--oe-radius)] font-heading font-semibold tracking-tight transition-all duration-200 ease-[var(--oe-ease)] disabled:opacity-50 disabled:pointer-events-none',
     variantClass[variant],
     sizeClass[size],
-    className ?? '',
-  ].join(' ');
+    className,
+  );
 }
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -41,7 +42,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button type="button" className={baseClass(variant, size, className)} {...props}>
+    <button type="button" className={buttonClass(variant, size, className)} {...props}>
       {children}
     </button>
   );
@@ -63,7 +64,7 @@ export function ButtonLink({
   children,
 }: ButtonLinkProps) {
   return (
-    <Link href={href} className={baseClass(variant, size, className)}>
+    <Link href={href} className={buttonClass(variant, size, className)}>
       {children}
     </Link>
   );

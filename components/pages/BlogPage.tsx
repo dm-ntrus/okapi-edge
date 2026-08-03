@@ -1,63 +1,86 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Link } from '@/lib/i18n/navigation';
 import { BLOG_POSTS } from '@/content/mock-data';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, Section } from '@/components/ui/Section';
 import { Search } from 'lucide-react';
 
+type CategoryId = 'all' | 'tech' | 'guides' | 'cases';
+const CATEGORY_FILTERS: { id: CategoryId; match?: string }[] = [
+  { id: 'all' },
+  { id: 'tech', match: 'Tech & Edge Architecture' },
+  { id: 'guides', match: 'Guides Métiers' },
+  { id: 'cases', match: 'Études de Cas' },
+];
+
 export const BlogPage: React.FC<{ posts?: typeof BLOG_POSTS }> = ({ posts = BLOG_POSTS }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('Tous');
+  const t = useTranslations('blog');
+  const [selectedCategory, setSelectedCategory] = useState<CategoryId>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = ['Tous', 'Tech & Edge Architecture', 'Guides Métiers', 'Études de Cas'];
-
   const filteredPosts = posts.filter((post) => {
-    const matchesCategory = selectedCategory === 'Tous' || post.category === selectedCategory;
+    const filter = CATEGORY_FILTERS.find((c) => c.id === selectedCategory);
+    const matchesCategory =
+      selectedCategory === 'all' || !filter?.match || post.category === filter.match;
+    const q = searchQuery.toLowerCase();
     const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+      !q ||
+      post.title.toLowerCase().includes(q) ||
+      post.excerpt.toLowerCase().includes(q) ||
+      post.tags.some((tag) => tag.toLowerCase().includes(q));
     return matchesCategory && matchesSearch;
   });
 
   return (
     <div className="w-full bg-[var(--oe-bg)]">
       <PageHero
-        eyebrow="Hub d'Intelligence & SEO"
-        title="Blog & Ressources Okapi"
-        description="Décryptages techniques, études de cas clients et guides d'implémentation de la conformité e-DGI en RDC."
+        eyebrow={t('hero.eyebrow')}
+        title={t('hero.title')}
+        description={t('hero.description')}
       />
 
       <Section className="bg-[var(--oe-bg)] border-b-0">
         <Container>
           <div className="mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-4">
             <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`shrink-0 rounded-[var(--oe-radius)] px-3 py-1.5 text-xs font-mono transition-colors ${
-                    selectedCategory === cat
-                      ? 'bg-[var(--oe-accent-soft)] text-[var(--oe-accent)] border border-[var(--oe-accent)]/30'
-                      : 'text-[var(--oe-text-muted)] hover:text-[var(--oe-text)] border border-transparent'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+              {CATEGORY_FILTERS.map((cat) => {
+                const selected = selectedCategory === cat.id;
+                return (
+                  <span key={cat.id} className="contents">
+                    <input
+                      type="radio"
+                      name="oe-blog-cat"
+                      id={`oe-blog-cat-${cat.id}`}
+                      checked={selected}
+                      onChange={() => setSelectedCategory(cat.id)}
+                      className="oe-native-toggle"
+                    />
+                    <label
+                      htmlFor={`oe-blog-cat-${cat.id}`}
+                      className={`oe-tap shrink-0 cursor-pointer rounded-[var(--oe-radius)] px-3 py-2 text-xs font-mono transition-colors min-h-11 inline-flex items-center ${
+                        selected
+                          ? 'bg-[var(--oe-accent-soft)] text-[var(--oe-accent)] border border-[var(--oe-accent)]/30'
+                          : 'text-[var(--oe-text-muted)] hover:text-[var(--oe-text)] border border-transparent'
+                      }`}
+                    >
+                      {t(`categories.${cat.id}`)}
+                    </label>
+                  </span>
+                );
+              })}
             </div>
 
             <div className="relative w-full md:w-72">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--oe-text-muted)]" />
               <input
                 type="text"
-                placeholder="Rechercher un article..."
+                placeholder={t('searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-[var(--oe-radius)] border border-[var(--oe-border)] bg-[var(--oe-bg)] pl-9 pr-3 py-2 text-sm text-[var(--oe-text)] placeholder:text-[var(--oe-text-muted)] focus:border-[var(--oe-accent)]/50 focus:outline-none"
+                className="oe-field pl-9"
               />
             </div>
           </div>
@@ -80,7 +103,7 @@ export const BlogPage: React.FC<{ posts?: typeof BLOG_POSTS }> = ({ posts = BLOG
                     ) : (
                       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--oe-surface)] to-[var(--oe-bg)]">
                         <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--oe-text-muted)]">
-                          Okapi Edge
+                          {t('coverFallback')}
                         </span>
                       </div>
                     )}
@@ -104,7 +127,7 @@ export const BlogPage: React.FC<{ posts?: typeof BLOG_POSTS }> = ({ posts = BLOG
                 </div>
                 <div className="flex items-center justify-between border-t border-[var(--oe-border)] px-6 py-4 text-xs text-[var(--oe-text-muted)]">
                   <span>{post.author}</span>
-                  <span className="font-mono text-[var(--oe-accent)]">Lire →</span>
+                  <span className="font-mono text-[var(--oe-accent)]">{t('readCta')}</span>
                 </div>
               </Link>
             ))}

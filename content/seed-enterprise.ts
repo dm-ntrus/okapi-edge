@@ -1123,10 +1123,181 @@ export const SEED_SETTINGS = [
   {
     key: 'site.contact',
     value: {
+      email: 'contact@okapiedge.com',
+      phone: '+243 81 900 0000',
       sales_email: 'partnerships@okapiedge.com',
       press_email: 'press@okapiedge.com',
       security_email: 'security@okapiedge.com',
-      hq: 'Global — Edge nodes EU / AF / ME',
+      location_short: {
+        fr: 'Kinshasa · Afrique / Monde',
+        en: 'Kinshasa · Africa / Global',
+      },
+      hq: {
+        fr: {
+          title: 'Quartier Général Kinshasa',
+          address_line1: 'Boulevard du 30 Juin, Immeuble Okapi, 4ème étage',
+          address_line2: 'Commune de la Gombe, Kinshasa, RDC',
+        },
+        en: {
+          title: 'Kinshasa Headquarters',
+          address_line1: 'Boulevard du 30 Juin, Immeuble Okapi, 4th floor',
+          address_line2: 'Commune de la Gombe, Kinshasa, DRC',
+        },
+      },
+    },
+  },
+  {
+    key: 'site.legal',
+    value: {
+      entity_type: 'etablissement',
+      entity_label: {
+        fr: 'établissement',
+        en: 'establishment',
+      },
+      registration: 'CD/KIN/RCCM/24-B-01492',
+      legal_name: 'Okapi Edge',
+      header: {
+        fr: {
+          badge: 'Cadre Légal & Conformité',
+          title: 'Mentions Légales & Politique de Confidentialité',
+          updated_at: 'Dernière mise à jour : Juillet 2026 • République Démocratique du Congo',
+        },
+        en: {
+          badge: 'Legal Framework & Compliance',
+          title: 'Legal Notice & Privacy Policy',
+          updated_at: 'Last updated: July 2026 • Democratic Republic of the Congo',
+        },
+      },
+      sections: {
+        publisher: {
+          fr: {
+            title: '1. Éditeur du Site',
+            body: 'Le site okapiedge.com est édité par Okapi Edge, établissement d’ingénierie logicielle immatriculé sous le numéro CD/KIN/RCCM/24-B-01492.',
+            footer:
+              'Siège : Boulevard du 30 Juin, Immeuble Okapi, Gombe, Kinshasa, RDC.\nDirecteur de la Publication : Patrick Mwamba, Président-Directeur Général.',
+          },
+          en: {
+            title: '1. Site Publisher',
+            body: 'The okapiedge.com website is published by Okapi Edge, a software engineering establishment registered under number CD/KIN/RCCM/24-B-01492.',
+            footer:
+              'Registered seat: Boulevard du 30 Juin, Immeuble Okapi, Gombe, Kinshasa, DRC.\nPublication Director: Patrick Mwamba, Chief Executive Officer.',
+          },
+        },
+        hosting: {
+          fr: {
+            title: '2. Hébergement & Cloud Souverain',
+            body: 'L’intégralité des données du site et des plateformes SaaS associées (Okapi Edu, Syntix Pharma, Okapi POS, Okapi Hospitals, Okapi FuelOils) est hébergée sur l’infrastructure de cloud souverain opérée par Okapi Edge au sein de datacenters sécurisés.',
+          },
+          en: {
+            title: '2. Hosting & Sovereign Cloud',
+            body: 'All website data and associated SaaS platforms (Okapi Edu, Syntix Pharma, Okapi POS, Okapi Hospitals, Okapi FuelOils) are hosted on the sovereign cloud infrastructure operated by Okapi Edge in secure datacenters.',
+          },
+        },
+        data: {
+          fr: {
+            title: '3. Protection des Données Personnelles & e-DGI',
+            body: 'Conformément à la réglementation sur la protection des données à caractère personnel et aux exigences de conformité, Okapi Edge garantit le chiffrement AES-256 de toutes les données sensibles.',
+          },
+          en: {
+            title: '3. Personal Data Protection & e-DGI',
+            body: 'In compliance with personal data protection regulations and applicable compliance requirements, Okapi Edge guarantees AES-256 encryption of all sensitive data.',
+          },
+        },
+        ip: {
+          fr: {
+            title: '4. Propriété Intellectuelle',
+            body: 'L’ensemble des contenus, marques, logos, visuels et architectures logicielles est la propriété exclusive de l’établissement Okapi Edge. Toute reproduction non autorisée constitue une contrefaçon sanctionnée par la loi.',
+          },
+          en: {
+            title: '4. Intellectual Property',
+            body: 'All content, trademarks, logos, visuals, and software architectures are the exclusive property of the Okapi Edge establishment. Any unauthorized reproduction constitutes an infringement punishable by law.',
+          },
+        },
+      },
+    },
+  },
+  {
+    key: 'site.about',
+    value: {
+      hero: {
+        fr: {
+          eyebrow: 'Histoire, Équipe & ADN Global',
+          title: 'À Propos d’Okapi Edge',
+          description:
+            'Un groupe technologique international développant des plateformes SaaS d’entreprise et une infrastructure Edge distribuée.',
+        },
+        en: {
+          eyebrow: 'History, Team & Global DNA',
+          title: 'About Okapi Edge',
+          description:
+            'An international technology group building enterprise SaaS platforms and distributed Edge infrastructure.',
+        },
+      },
+      history: {
+        fr: {
+          eyebrow: 'L’Histoire Fondatrice',
+          title: 'L’Excellence logicielle et la vitesse Edge.',
+          body1:
+            'Fondé par des chercheurs et ingénieurs issus de centres de recherche et d’entreprises technologiques de premier plan, Okapi Edge a été conçu pour résoudre la complexité des systèmes d’information distribués.',
+          body2:
+            'Nous combinons le calcul en bordure de réseau (Edge Computing), la synchronisation CRDT temps réel et une architecture sécurisée Zero-Trust pour éditer des SaaS d’entreprise ultra-performants.',
+        },
+        en: {
+          eyebrow: 'The Founding Story',
+          title: 'Software excellence at Edge speed.',
+          body1:
+            'Founded by researchers and engineers from leading research centers and technology companies, Okapi Edge was created to tackle the complexity of distributed information systems.',
+          body2:
+            'We combine Edge Computing, real-time CRDT synchronization, and a Zero-Trust security architecture to ship ultra-performant enterprise SaaS.',
+        },
+      },
+      timeline: [
+        {
+          year: '2024',
+          fr: 'Fondation d’Okapi Edge et R&D Architecture Distribuée',
+          en: 'Founding of Okapi Edge and R&D on distributed architecture',
+        },
+        {
+          year: '2025',
+          fr: 'Déploiement des premières plateformes Okapi Edu & Syntix Pharma',
+          en: 'Rollout of the first Okapi Edu and Syntix Pharma platforms',
+        },
+        {
+          year: '2026',
+          fr: 'Lancement du Réseau Edge Multi-Régions & Expansion Internationale',
+          en: 'Launch of the multi-region Edge network and international expansion',
+        },
+      ],
+      governance: {
+        fr: {
+          eyebrow: 'Gouvernance Exécutive',
+          title: 'L’Équipe Dirigeante',
+          description:
+            'Un collectif de stratèges, chercheurs et bâtisseurs engagés pour l’excellence.',
+          hq_label: 'Siège mondial',
+        },
+        en: {
+          eyebrow: 'Executive Governance',
+          title: 'Leadership Team',
+          description:
+            'A collective of strategists, researchers, and builders committed to excellence.',
+          hq_label: 'Global HQ',
+        },
+      },
+      ambition: {
+        fr: {
+          title: 'Vous partagez notre ambition ?',
+          description:
+            'Nous recrutons continuellement des ingénieurs systèmes, UX designers et product managers de classe mondiale.',
+          cta: 'Découvrir nos Opportunités',
+        },
+        en: {
+          title: 'Do you share our ambition?',
+          description:
+            'We are continuously hiring world-class systems engineers, UX designers, and product managers.',
+          cta: 'Explore Opportunities',
+        },
+      },
     },
   },
   {

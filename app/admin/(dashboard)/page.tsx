@@ -6,6 +6,8 @@ import {
   Boxes,
   Inbox,
   ArrowRight,
+  UserRound,
+  MapPin,
 } from 'lucide-react';
 import { getAdminStats } from '@/lib/db/queries';
 import { isDbConfigured } from '@/lib/db/client';
@@ -19,6 +21,7 @@ const LINKS = [
   { href: '/admin/jobs', label: 'Offres', key: 'jobs' as const, icon: Briefcase },
   { href: '/admin/press', label: 'Presse', key: 'press' as const, icon: Newspaper },
   { href: '/admin/products', label: 'Produits', key: 'products' as const, icon: Boxes },
+  { href: '/admin/team', label: 'Équipe', key: 'team' as const, icon: UserRound },
   { href: '/admin/inquiries', label: 'Nouveaux leads', key: 'newInquiries' as const, icon: Inbox },
 ];
 
@@ -27,6 +30,7 @@ const LEAD_SHORTCUTS = [
   { href: '/admin/inquiries/b2b', label: 'Partenariats & B2B' },
   { href: '/admin/inquiries/investors', label: 'Investisseurs' },
   { href: '/admin/newsletter', label: 'Newsletter' },
+  { href: '/admin/settings/contact', label: 'Adresses' },
 ];
 
 export default async function AdminDashboardPage() {
@@ -39,6 +43,7 @@ export default async function AdminDashboardPage() {
     jobs: 0,
     press: 0,
     products: 0,
+    team: 0,
     newInquiries: 0,
   };
 
@@ -50,7 +55,7 @@ export default async function AdminDashboardPage() {
         dbOk={isDbConfigured()}
       />
 
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 mb-8">
         {LINKS.map((item) => {
           const Icon = item.icon;
           return (
@@ -80,7 +85,11 @@ export default async function AdminDashboardPage() {
           <ol className="list-decimal pl-5 space-y-2">
             <li>Vérifiez que Surreal Cloud est connectée (badge vert ci-dessus).</li>
             <li>Créez ou éditez un article / produit dans la langue FR, puis dupliquez l’équivalent EN.</li>
-            <li>Contrôlez le rendu sur <code className="text-[var(--oe-accent)]">/fr</code> et <code className="text-[var(--oe-accent)]">/en</code>.</li>
+            <li>Mettez à jour l’équipe dirigeante et les adresses/contacts.</li>
+            <li>
+              Contrôlez le rendu sur <code className="text-[var(--oe-accent)]">/fr</code> et{' '}
+              <code className="text-[var(--oe-accent)]">/en</code>.
+            </li>
             <li>Traitez les leads dans la boîte de réception (statut Nouveau → En cours → Clos).</li>
           </ol>
           <div className="flex flex-wrap gap-2 pt-2">
@@ -91,7 +100,13 @@ export default async function AdminDashboardPage() {
               </Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/admin/inquiries/contact">Ouvrir Contact</Link>
+              <Link href="/admin/team">Équipe</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/admin/settings/contact">
+                <MapPin className="h-4 w-4" />
+                Contacts
+              </Link>
             </Button>
             <Button asChild variant="outline">
               <Link href="/admin/inquiries">Toute l’inbox</Link>

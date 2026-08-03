@@ -44,10 +44,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
+      lang="fr"
+      dir="ltr"
       className={`scroll-smooth ${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-[var(--oe-bg)] text-[var(--oe-text)] antialiased font-body min-h-dvh">
+      <body className="bg-[var(--oe-bg)] text-[var(--oe-text)] antialiased font-body min-h-dvh supports-[padding:max(0px)]:pb-[env(safe-area-inset-bottom)]">
         {children}
       </body>
     </html>

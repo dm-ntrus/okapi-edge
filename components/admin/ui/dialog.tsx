@@ -31,13 +31,14 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed left-1/2 top-1/2 z-50 grid w-[calc(100%-1.5rem)] max-w-2xl max-h-[90dvh] -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-xl border border-[var(--oe-border)] bg-[var(--oe-surface)] p-6 shadow-xl duration-200',
+        'fixed inset-x-0 bottom-0 z-50 grid w-full max-h-[94dvh] gap-4 overflow-y-auto rounded-t-2xl border border-[var(--oe-border)] bg-[var(--oe-surface)] p-4 pb-[max(1rem,var(--oe-safe-bottom))] shadow-xl duration-200 sm:inset-x-auto sm:left-1/2 sm:top-1/2 sm:bottom-auto sm:w-[calc(100%-1.5rem)] sm:max-w-2xl sm:max-h-[90dvh] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl sm:p-6',
         className,
       )}
       {...props}
     >
+      <div className="mx-auto mb-1 h-1 w-10 rounded-full bg-white/15 sm:hidden" aria-hidden />
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-md p-1 text-[var(--oe-text-muted)] hover:bg-[var(--oe-surface-hover)] hover:text-[var(--oe-text)]">
+      <DialogPrimitive.Close className="oe-tap oe-touch absolute right-3 top-3 sm:right-4 sm:top-4 inline-flex items-center justify-center rounded-md text-[var(--oe-text-muted)] hover:bg-[var(--oe-surface-hover)] hover:text-[var(--oe-text)]">
         <X className="h-4 w-4" />
         <span className="sr-only">Fermer</span>
       </DialogPrimitive.Close>
@@ -52,7 +53,7 @@ export function DialogHeader({ className, ...props }: React.HTMLAttributes<HTMLD
 
 export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex flex-col-reverse sm:flex-row sm:justify-end gap-2', className)} {...props} />
+    <div className={cn('flex flex-col-reverse sm:flex-row sm:justify-end gap-2 [&_button]:w-full sm:[&_button]:w-auto', className)} {...props} />
   );
 }
 

@@ -58,7 +58,7 @@
   "b2b_success_desc": "Un conseiller Okapi Edge vous recontactera dans les plus brefs délais.",
   "footer_tagline": "Logiciels d’entreprise haute performance et infrastructures distribuées pour l’Afrique et le monde.",
   "footer_nodes_status": "Réseau global : 100% opérationnel",
-  "footer_rights": "Okapi Edge Inc. Tous droits réservés.",
+  "footer_rights": "Okapi Edge. Tous droits réservés.",
   "footer_legal": "Mentions légales",
   "footer_resources": "Ressources",
   "footer_newsletter_title": "Newsletter",
@@ -73,5 +73,968 @@
   "footer_status": "Statut",
   "footer_b2b_hint": "Canal partenariats & B2B via",
   "meta_home_title": "Okapi Edge | Logiciels d’Entreprise & Infrastructures Distribuées",
-  "meta_home_description": "Okapi Edge développe des plateformes SaaS d’entreprise et des systèmes d’IA pour les organisations modernes."
+  "meta_home_description": "Okapi Edge développe des plateformes SaaS d’entreprise et des systèmes d’IA pour les organisations modernes.",
+  "a11y": {
+    "brand": "Okapi Edge",
+    "primaryNav": "Navigation principale",
+    "mobileNav": "Navigation mobile",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "searchDialog": "Recherche",
+    "investorsDialog": "Espace investisseurs"
+  },
+  "meta": {
+    "home": {
+      "title": "Okapi Edge | Logiciels d’Entreprise & Infrastructures Distribuées",
+      "description": "Okapi Edge développe des plateformes SaaS d’entreprise et des systèmes d’IA pour les organisations modernes."
+    },
+    "about": {
+      "title": "À propos",
+      "description": "Histoire, équipe et manifeste d’Okapi Edge."
+    },
+    "vision": {
+      "title": "Vision & Engagements",
+      "description": "Vision, manifeste et engagements d’Okapi Edge."
+    },
+    "tech": {
+      "title": "Technologie & IA",
+      "description": "Ingénierie edge, Zero-Trust et souveraineté technologique."
+    },
+    "ecosystem": {
+      "title": "Solutions & Plateformes",
+      "description": "Écosystème SaaS Okapi Edge : Edu, Syntix, POS, Hospitals, FuelOils."
+    },
+    "careers": {
+      "title": "Carrières",
+      "description": "Rejoignez les équipes ingénierie et produit d’Okapi Edge."
+    },
+    "blog": {
+      "title": "Blog & Articles",
+      "description": "Insights engineering, edge computing et études de cas Okapi Edge."
+    },
+    "blogPost": {
+      "fallbackTitle": "Article"
+    },
+    "press": {
+      "title": "Espace Presse",
+      "description": "Communiqués et actualités Okapi Edge."
+    },
+    "contact": {
+      "title": "Contact B2B",
+      "description": "Contactez Okapi Edge pour partenariats et projets entreprise."
+    },
+    "legal": {
+      "title": "Mentions Légales",
+      "description": "Mentions légales et politique de confidentialité Okapi Edge."
+    },
+    "investors": {
+      "title": "Espace Investisseurs",
+      "description": "Relations investisseurs et dossier confidentiel Okapi Edge."
+    },
+    "products": {
+      "edu": {
+        "title": "Okapi Edu",
+        "description": "Plateforme mondiale de gestion éducative Okapi Edu."
+      },
+      "syntix": {
+        "title": "Syntix Pharma",
+        "description": "Plateforme pharmaceutique Syntix Pharma."
+      },
+      "pos": {
+        "title": "Okapi POS",
+        "description": "Point de vente Okapi POS."
+      },
+      "hospitals": {
+        "title": "Okapi Hospitals",
+        "description": "Plateforme hospitalière Okapi Hospitals."
+      },
+      "fueloils": {
+        "title": "Okapi FuelOils",
+        "description": "Plateforme FuelOils Okapi Edge."
+      }
+    }
+  },
+  "common": {
+    "language": "Langue",
+    "backHome": "Retour à l’accueil",
+    "backToEcosystem": "Retour à l’Écosystème",
+    "backToBlog": "Retour au Blog",
+    "allArticles": "Tous les Articles",
+    "readMore": "Lire →",
+    "viewAll": "Tout voir",
+    "learnMoreArrow": "→",
+    "productSheetLink": "Fiche détaillée {name} →",
+    "byAuthor": "Par {author}, Okapi Edge",
+    "errors": {
+      "sendFailed": "Envoi impossible"
+    },
+    "footer": {
+      "tagline": "Logiciels d’entreprise haute performance et infrastructures distribuées pour l’Afrique et le monde.",
+      "nodesStatus": "Réseau global : 100% opérationnel",
+      "rights": "Okapi Edge. Tous droits réservés.",
+      "legal": "Mentions légales",
+      "resources": "Ressources",
+      "newsletter": {
+        "title": "Newsletter",
+        "description": "Analyses trimestrielles sur systèmes distribués, edge AI et conformité e-DGI.",
+        "placeholder": "votre@email.com",
+        "cta": "S’abonner",
+        "success": "Abonnement confirmé — merci.",
+        "pending": "Vérifiez votre e-mail pour confirmer l’abonnement."
+      },
+      "contactEmail": "contact@okapiedge.com",
+      "colCompany": "Groupe",
+      "colPlatforms": "Plateformes",
+      "status": "Statut",
+      "b2bHint": "Canal partenariats & B2B via",
+      "location": "Kinshasa · Africa / Global"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "group": "Groupe",
+    "vision": "Vision & Engagements",
+    "about": "À propos",
+    "tech": "Technologie & IA",
+    "careers": "Carrières",
+    "press": "Espace Presse",
+    "ecosystem": "Solutions & Plateformes",
+    "blog": "Blog & Articles",
+    "contact": "Contact B2B",
+    "investors": "Espace Investisseurs",
+    "partnership": "Partenariat",
+    "searchPlaceholder": "Rechercher une technologie, un produit, un sujet..."
+  },
+  "megaMenu": {
+    "eyebrow": "Solutions",
+    "title": "Plateformes enterprise",
+    "viewAll": "Tout voir"
+  },
+  "home": {
+    "hero": {
+      "badge": "Okapi Edge • Plateformes Logicielles & Ingénierie",
+      "titlePart1": "Logiciels d’Entreprise.",
+      "titlePart2": "Infrastructures Distribuées & IA.",
+      "subtitle": "Okapi Edge développe des plateformes applicatives et des systèmes d’intelligence artificielle conçus pour répondre aux exigences des organisations modernes.",
+      "ctaEcosystem": "Découvrir nos solutions",
+      "ctaContact": "Contacter l’équipe"
+    },
+    "metrics": {
+      "learners": "2.8M+ Utilisateurs",
+      "learnersSub": "Sur Okapi Edu",
+      "compliance": "100% Conforme",
+      "complianceSub": "Normes & Réglementations",
+      "pos": "18,500+ Déploiements",
+      "posSub": "Points de Vente Actifs",
+      "sla": "99.99% SLA",
+      "slaSub": "Disponibilité Réseau"
+    },
+    "techCore": {
+      "eyebrow": "Architecture",
+      "title": "Ingénierie & Architecture Système",
+      "subtitle": "Des fondamentaux d’ingénierie conçus pour la performance, la fiabilité et la sécurité d’entreprise.",
+      "tabs": {
+        "rust": {
+          "title": "Performance & Latence Minimale",
+          "description": "Architecture logicielle haute performance garantissant des temps de réponse ultra-rapides et une stabilité système maximale."
+        },
+        "crdt": {
+          "title": "Résilience Réseau & Mode Hors-Ligne",
+          "description": "Continuité d’activité totale grâce à la réplication distribuée des données, assurant un fonctionnement ininterrompu même sans connexion."
+        },
+        "zerotrust": {
+          "title": "Sécurité d’Entreprise & Conformité",
+          "description": "Protection absolue des données critiques par chiffrement de niveau militaire, enclaves isolées et conformité réglementaire."
+        },
+        "ai": {
+          "title": "Intelligence Prédictive & Analyses",
+          "description": "Inférence locale et modélisation prédictive au plus près des besoins métier pour éclairer la prise de décision en temps réel."
+        }
+      },
+      "metrics": {
+        "rust": {
+          "responseTime": "Temps de réponse",
+          "availability": "Disponibilité",
+          "footprint": "Empreinte système",
+          "compatibility": "Compatibilité"
+        },
+        "crdt": {
+          "dataLoss": "Pertes de données",
+          "offlineAutonomy": "Autonomie offline",
+          "bandwidth": "Bande passante",
+          "architecture": "Architecture"
+        },
+        "zerotrust": {
+          "encryption": "Chiffrement",
+          "compliance": "Conformité",
+          "isolation": "Isolation",
+          "access": "Accès"
+        },
+        "ai": {
+          "decision": "Décision",
+          "privacy": "Confidentialité",
+          "precision": "Précision",
+          "inference": "Inférence"
+        }
+      }
+    },
+    "products": {
+      "eyebrow": "Plateformes",
+      "title": "Nos Plateformes Applicatives",
+      "subtitle": "Des logiciels métier spécialisés, conçus pour simplifier la gestion des opérations complexes."
+    },
+    "demo": {
+      "eyebrow": "Démonstration",
+      "title": "Plateformes en action",
+      "description": "Explorez les interfaces métier conçues pour la vitesse, la résilience et la conformité.",
+      "interactive": {
+        "header": {
+          "eyebrow": "Démo interactive",
+          "title": "Expérimentez nos plateformes"
+        },
+        "edu": {
+          "title": "Okapi Edu • Tableau de Bord Prédictif",
+          "badge": "Mode Direct",
+          "description": "IA Contextuelle de détection de risque de décrochage & Suivi des frais de scolarité.",
+          "runButton": "Exécuter Modèle IA Prédictif",
+          "runningButton": "Analyse IA en cours...",
+          "columns": {
+            "student": "Étudiant / Élève",
+            "grade": "Promotion / Niveau",
+            "risk": "Score Risque IA",
+            "diagnosis": "Diagnostic IA Contextuel",
+            "tuition": "Frais Scolaires (M-Pesa)"
+          },
+          "tuition": {
+            "paid": "Réglé (Quittance #8841)",
+            "pending": "En attente (Relance SMS)"
+          },
+          "aiFooter": {
+            "message": "Le modèle IA local prédit 1 élève nécessitant un soutien pédagogique immédiat.",
+            "model": "Modèle Local ONNX v2.4"
+          },
+          "students": {
+            "0": {
+              "name": "Evoloko Mpasi",
+              "grade": "3ème LMD Informatique",
+              "status": "Excellente progression"
+            },
+            "1": {
+              "name": "Kambale Vianney",
+              "grade": "1ère Lic. Médecine",
+              "status": "Risque décrochage (Absences)"
+            },
+            "2": {
+              "name": "Ngalula Beatrice",
+              "grade": "2ème BAC Économie",
+              "status": "Régulier"
+            }
+          }
+        },
+        "pharma": {
+          "title": "Syntix Pharma • Caisse Officine & e-DGI",
+          "badge": "Facture Normalisée",
+          "description": "Scannage Datamatrix, contrôle automatique des péremptions et signature fiscale e-DGI.",
+          "scanButton": "Scanner Boîte GS1",
+          "scanningButton": "Scannage...",
+          "signButton": "Signer Facture e-DGI",
+          "lot": "N° Lot : {lot}",
+          "expiry": "Péremption : {expiry}",
+          "signed": "Signé cryptographiquement",
+          "ticket": {
+            "title": "TICKET NORMALISÉ e-DGI #RDC-2026-99042",
+            "amounts": "Montant HT : {ht} CDF | TVA 16% : {tva} CDF",
+            "hash": "Hash SHA-256 : 9f8a7b...c3d2e1",
+            "transmitted": "Transmis à la DGI Kinshasa (200ms)"
+          },
+          "items": {
+            "0": {
+              "name": "Artemether + Lumefantrine 80mg"
+            },
+            "1": {
+              "name": "Paracétamol Injectable 100ml"
+            },
+            "2": {
+              "name": "Amoxicilline 500mg Sirop"
+            }
+          }
+        },
+        "pos": {
+          "title": "Okapi POS • Moteur Tauri / Offline-First",
+          "badge": "Caisse Rapide",
+          "description": "Fonctionnement ininterrompu même en cas de panne réseau générale.",
+          "networkOnline": "RÉSEAU EN LIGNE (Synchro Cloud)",
+          "networkOffline": "RÉSEAU COUPÉ (Mode Offline Actif)",
+          "cartLabel": "Panier Client en cours",
+          "total": "Total à Payer",
+          "paymentMode": "Mode d’encaissement :",
+          "paymentModeValue": "Mobile Money / Cash",
+          "payButton": "Encaisser Instantanément",
+          "paymentSuccessCloud": "Paiement validé ! Ticket scellé sur le cloud.",
+          "paymentSuccessOffline": "Paiement validé ! Ticket scellé en local (CRDT).",
+          "items": {
+            "0": {
+              "name": "Bouteille d’eau 1.5L"
+            },
+            "1": {
+              "name": "Sac de Riz 25kg Premium"
+            }
+          }
+        }
+      }
+    },
+    "about": {
+      "eyebrow": "Groupe",
+      "quote": "« Concevoir des technologies d’exception qui renforcent l’efficacité et la souveraineté des organisations. »",
+      "title": "Une vision globale de l’innovation logicielle.",
+      "description": "Okapi Edge associe recherche, ingénierie et design pour concevoir des produits fiables, rapides et sécurisés.",
+      "cta": "À propos d’Okapi Edge"
+    },
+    "careers": {
+      "badge": "Rejoindre l’équipe",
+      "title": "Construisez l’avenir avec nous.",
+      "description": "Nous recrutons des ingénieurs et chercheurs passionnés par le développement logiciel, l’IA et les systèmes distribués.",
+      "cta": "Découvrir nos offres"
+    },
+    "investors": {
+      "eyebrow": "Investisseurs",
+      "title": "Partenaires stratégiques",
+      "description": "Accédez à l’espace confidentiel sous NDA pour le dossier d’investissement Okapi Edge."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Partenariats & Grands Comptes",
+      "subtitle": "Échangez avec nos équipes pour vos projets d’infrastructure ou d’intégration logicielle.",
+      "name": "Nom complet",
+      "org": "Organisation / Entreprise",
+      "email": "Email professionnel",
+      "interest": "Domaine d’intérêt",
+      "message": "Message / Votre besoin",
+      "submit": "Envoyer votre demande",
+      "successTitle": "Message bien reçu",
+      "successDesc": "Un conseiller Okapi Edge vous recontactera dans les plus brefs délais."
+    },
+    "footerLinks": {
+      "solutions": "Solutions",
+      "engineering": "Ingénierie",
+      "edgeInfra": "Edge infrastructure"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Histoire, Équipe & ADN Global",
+      "title": "À Propos d’Okapi Edge",
+      "description": "Un groupe technologique international développant des plateformes SaaS d’entreprise et une infrastructure Edge distribuée."
+    },
+    "history": {
+      "eyebrow": "L’Histoire Fondatrice",
+      "title": "L’Excellence logicielle et la vitesse Edge.",
+      "body1": "Fondé par des chercheurs et ingénieurs issus de centres de recherche et d’entreprises technologiques de premier plan, Okapi Edge a été conçu pour résoudre la complexité des systèmes d’information distribués.",
+      "body2": "Nous combinons le calcul en bordure de réseau (Edge Computing), la synchronisation CRDT temps réel et une architecture sécurisée Zero-Trust pour éditer des SaaS d’entreprise ultra-performants."
+    },
+    "timeline": {
+      "y2024": "Fondation d’Okapi Edge et R&D Architecture Distribuée",
+      "y2025": "Déploiement des premières plateformes Okapi Edu & Syntix Pharma",
+      "y2026": "Lancement du Réseau Edge Multi-Régions & Expansion Internationale"
+    },
+    "governance": {
+      "eyebrow": "Gouvernance Exécutive",
+      "title": "L’Équipe Dirigeante",
+      "description": "Un collectif de stratèges, chercheurs et bâtisseurs engagés pour l’excellence.",
+      "hqLabel": "Global HQ"
+    },
+    "ambition": {
+      "title": "Vous partagez notre ambition ?",
+      "description": "Nous recrutons continuellement des ingénieurs systèmes, UX designers et product managers de classe mondiale.",
+      "cta": "Découvrir nos Opportunités"
+    }
+  },
+  "vision": {
+    "hero": {
+      "eyebrow": "Vision & Impact International",
+      "title": "Forger l’Avenir Technologique des Logiciels d’Entreprise",
+      "description": "Comment Okapi Edge construit des infrastructures hautement résilientes pour pérenniser l’éducation, la santé et le commerce à l’échelle mondiale."
+    },
+    "manifesto": {
+      "excerptLabel": "Extrait du Manifeste Fondateur",
+      "quote": "Bâtir des logiciels d’infrastructure d’une fiabilité absolue, là où la performance et la résilience comptent le plus.",
+      "body": "Okapi Edge est un groupe technologique mondial éditant des plateformes SaaS d’entreprise à fort impact. Notre philosophie repose sur l’ingénierie de pointe, les architectures Edge Offline-First, le chiffrement zéro-confiance et une recherche constante de simplicité et d’élégance pour nos utilisateurs.",
+      "principles": {
+        "eyebrow": "Principes",
+        "title": "Les 4 Piliers Cardinaux de Notre Action",
+        "pillarLabel": "0{index} · Pilier stratégique",
+        "items": {
+          "resilience": {
+            "title": "Résilience Edge & Offline-First",
+            "description": "Nos applications continuent de fonctionner à la vitesse maximale, même en cas d’interruption totale de la connectivité réseau."
+          },
+          "sovereignty": {
+            "title": "Chiffrement & Souveraineté des Données",
+            "description": "Architecture zéro-confiance (Zero-Trust) garantissant la protection absolue et la gouvernance exclusive de vos données d’entreprise."
+          },
+          "intelligence": {
+            "title": "Intelligence Contextuelle Embarquée",
+            "description": "Algorithmes prédictifs intégrés au plus près du terrain pour anticiper la demande, la santé et les besoins éducatifs."
+          },
+          "ergonomics": {
+            "title": "Ergonomie & Vitesse Sub-Milliseconde",
+            "description": "Des interfaces modernes et épurées qui éliminent toute friction et décuplent la productivité au quotidien."
+          }
+        }
+      }
+    },
+    "solutionsBanner": {
+      "title": "Consulter nos Fiches Solutions",
+      "description": "Découvrez la déclinaison opérationnelle de cette vision dans Okapi Edu, Syntix Pharma et Okapi POS.",
+      "cta": "Explorer l’Écosystème"
+    }
+  },
+  "tech": {
+    "hero": {
+      "eyebrow": "Forteresse Numérique & Edge Security",
+      "title": "La tech n’est pas un outil. C’est un territoire.",
+      "description": "Explications détaillées de notre architecture multi-tenant, chiffrement Zero-Trust, clusters Edge multi-régions et moteur de conformité globale."
+    },
+    "architecture": {
+      "eyebrow": "Architecture",
+      "title": "Six piliers de souveraineté technique",
+      "description": "Infrastructure, cryptographie, conformité et résilience opérationnelle.",
+      "pillars": {
+        "datacenters": {
+          "title": "Datacenters Multi-Régions Edge",
+          "description": "Vos données restent stockées de façon sécurisée au sein de nos enclaves de serveurs multi-régions avec réplication chiffrée sub-milliseconde."
+        },
+        "encryption": {
+          "title": "Chiffrement AES-256 / Ed25519",
+          "description": "Données chiffrées au repos et en transit. Les clés de déchiffrement sont sous la gouvernance exclusive du client ou du tenant institutionnel."
+        },
+        "edgi": {
+          "title": "Conformité e-DGI Native",
+          "description": "Génération directe de la facture électronique normalisée RDC avec signature cryptographique en 200ms et transmission sécurisée."
+        },
+        "offline": {
+          "title": "Moteur Offline-First & CRDT",
+          "description": "Fonctionnement complet hors-ligne grâce aux structures de données CRDT (Conflict-free Replicated Data Types) pour une resynchronisation sans heurt."
+        },
+        "ai": {
+          "title": "IA Contextuelle Locale",
+          "description": "Modèles de Machine Learning entraînés sur des données locales et anonymisées, garantissant la pertinence sans modèle aveuglément importé."
+        },
+        "multiTenant": {
+          "title": "Architecture Multi-Tenant & API-First",
+          "description": "Chaque établissement ou entreprise possède un environnement cloisonné avec accès complet aux webhooks et API REST/gRPC."
+        }
+      }
+    },
+    "audit": {
+      "title": "Besoin d’un audit de souveraineté pour votre infrastructure ?",
+      "description": "Nos équipes d’ingénieurs accompagnent les ministères, universités et grands groupes dans leur transition souveraine.",
+      "cta": "Contacter nos Architectes"
+    }
+  },
+  "ecosystem": {
+    "hero": {
+      "eyebrow": "Portfolio Global & Systèmes d’Ingénierie",
+      "title": "Plateformes & Technologies Okapi Edge",
+      "description": "Du moteur de calcul Edge aux architectures d’IA contextuelle et logiciels verticaux critiques. Découvrez notre écosystème global."
+    },
+    "verticals": {
+      "eyebrow": "Produits",
+      "title": "Plateformes verticales",
+      "description": "Chaque solution s’appuie sur la même infrastructure Edge souveraine."
+    },
+    "details": {
+      "eyebrow": "Détail",
+      "title": "Indicateurs & capacités",
+      "description": "Aperçu des métriques métier et des fonctionnalités clés par plateforme.",
+      "impactLabel": "Impact métier",
+      "productSheetLink": "Fiche détaillée {name} →"
+    },
+    "rd": {
+      "eyebrow": "Laboratoire R&D",
+      "title": "Projets de Recherche & Innovation High-Tech",
+      "description": "IA embarquée, systèmes souverains et cryptographie post-quantique.",
+      "projects": {
+        "aiEngine": {
+          "status": "R&D Active",
+          "title": "Okapi Edge AI Engine",
+          "description": "Modèles de LLM compacts et inférence ONNX optimisée pour processeurs embarqués et terminaux à faible consommation."
+        },
+        "govOs": {
+          "status": "Incubation",
+          "title": "Okapi Gov OS",
+          "description": "Système d’interopérabilité ministérielle, registre d’identité souverain et coffre-fort numérique étatique."
+        },
+        "quantum": {
+          "status": "Recherche",
+          "title": "Quantum Security Enclaves",
+          "description": "Schémas de cryptographie post-quantique (Lattice-based cryptography) pour la protection des données critiques."
+        }
+      }
+    }
+  },
+  "careers": {
+    "hero": {
+      "eyebrow": "Rejoignez nos Ingénieurs",
+      "title": "Concevez des logiciels à fort impact mondial.",
+      "description": "Rejoignez une équipe d’ingénieurs passionnés par les architectures distribuées, le Edge Computing et l’excellence logicielle."
+    },
+    "culture": {
+      "eyebrow": "Culture",
+      "title": "Ce qui nous anime",
+      "description": "Impact terrain, exigence technique et flexibilité remote-first.",
+      "values": {
+        "impact": {
+          "label": "Valeur #1",
+          "title": "Impact Direct",
+          "description": "Vos systèmes soutiennent quotidiennement des milliers d’écoles, de pharmacies et de réseaux de distribution."
+        },
+        "autonomy": {
+          "label": "Valeur #2",
+          "title": "Autonomie & Exigence",
+          "description": "Nous privilégions les profils capables de concevoir des architectures résilientes avec une rigueur absolue."
+        },
+        "remote": {
+          "label": "Valeur #3",
+          "title": "Organisation Remote-First",
+          "description": "Travaillez de manière flexible avec nos équipes distribuées à travers les principaux hubs mondiaux."
+        }
+      }
+    },
+    "openings": {
+      "title": "Postes Ouverts ({count})",
+      "departments": {
+        "all": "Tous",
+        "engineering": "Ingénierie",
+        "product": "Produit",
+        "operations": "Opérations"
+      },
+      "applyCta": "Postuler à l’offre →"
+    },
+    "apply": {
+      "nameLabel": "Nom complet *",
+      "namePlaceholder": "votre nom",
+      "emailLabel": "Email *",
+      "emailPlaceholder": "votre@email.com",
+      "resumeLabel": "Lien CV / GitHub / LinkedIn *",
+      "resumePlaceholder": "https://github.com/votre-compte ou LinkedIn",
+      "submit": "Envoyer ma Candidature",
+      "successTitle": "Candidature transmise avec succès",
+      "successDescription": "Merci {name}. Notre équipe d’ingénierie étudiera votre profil sous 5 jours ouvrés.",
+      "fallbackMessage": "Candidature — {title}"
+    }
+  },
+  "blog": {
+    "hero": {
+      "eyebrow": "Hub d’Intelligence & SEO",
+      "title": "Blog & Ressources Okapi",
+      "description": "Décryptages techniques, études de cas clients et guides d’implémentation de la conformité e-DGI en RDC."
+    },
+    "categories": {
+      "all": "Tous",
+      "tech": "Tech & Edge Architecture",
+      "guides": "Guides Métiers",
+      "cases": "Études de Cas"
+    },
+    "searchPlaceholder": "Rechercher un article...",
+    "coverFallback": "Okapi Edge",
+    "readCta": "Lire →",
+    "post": {
+      "backToBlog": "Retour au Blog",
+      "byPrefix": "Par {author}, Okapi Edge",
+      "allArticlesCta": "Tous les Articles"
+    }
+  },
+  "press": {
+    "header": {
+      "eyebrow": "Espace Presse & Média",
+      "title": "Salle de Presse Okapi Edge",
+      "description": "Communiqués officiels, kits médias, logos haute résolution et contacts pour la presse technologique et économique."
+    },
+    "releases": {
+      "title": "Derniers Communiqués Officiels",
+      "downloadPdf": "Télécharger le Communiqué PDF",
+      "pdfComingSoon": "PDF bientôt disponible"
+    },
+    "mediaKit": {
+      "title": "Kit Média Officiel (Brand Assets)",
+      "description": "Téléchargez les logos vectoriels SVG/PNG d’Okapi Edge, les chartes graphiques et les portraits officiels de la direction.",
+      "downloadCta": "Télécharger Kit Média (ZIP)",
+      "downloadAlert": "Téléchargement du Kit Média Okapi Edge ZIP (Logos, Charte, Photos HD)"
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Canal Partenariats & B2B",
+      "title": "Initier un Partenariat d’Infrastructure",
+      "description": "Échangez directement avec les stratèges d’Okapi Edge pour déployer nos plateformes applicatives dans votre institution."
+    },
+    "success": {
+      "title": "Signal reçu par le Quartier Général.",
+      "description": "Votre message est important. Un stratège vous répond dans les 48h. Ce n’est pas une réponse automatique, c’est le début d’une conversation.",
+      "resetCta": "Envoyer une autre demande"
+    },
+    "form": {
+      "nameLabel": "Nom complet *",
+      "namePlaceholder": "Nom & Prénom",
+      "organizationLabel": "Organisation / Institution *",
+      "organizationPlaceholder": "Ministère, Université, Pharmacie...",
+      "interestLabel": "Domaine d’Intérêt",
+      "interestOptions": {
+        "edu": "Okapi Edu (Scolaire & Univ)",
+        "syntix": "Syntix Pharma (Pharmacie & e-DGI)",
+        "pos": "Okapi POS (Commerce & Caisse)",
+        "sovereign": "Cloud Souverain & Sur-mesure"
+      },
+      "emailLabel": "Email professionnel *",
+      "emailPlaceholder": "nom@institution.cd",
+      "phoneLabel": "Téléphone / WhatsApp",
+      "phonePlaceholder": "+243...",
+      "messageLabel": "Message ou projet *",
+      "messagePlaceholder": "Précisez la taille de votre réseau ou vos objectifs d’intégration...",
+      "submitCta": "Entrer en Contact",
+      "footnote": "Communications confidentielles. Données scellées à Kinshasa."
+    },
+    "hq": {
+      "title": "Quartier Général Kinshasa",
+      "addressLabel": "Adresse Physique",
+      "addressLine1": "Boulevard du 30 Juin, Immeuble Okapi, 4ème étage",
+      "addressLine2": "Commune de la Gombe, Kinshasa, RDC",
+      "emailLabel": "Email Général",
+      "emailValue": "contact@okapi-group.cd",
+      "phoneLabel": "Ligne Directe B2B",
+      "phoneValue": "+243 81 900 0000"
+    },
+    "security": {
+      "badge": "Standard de Sécurité ISO & e-DGI",
+      "description": "Tous les échanges d’information entre votre institution et Okapi Edge sont régis par nos protocoles de confidentialité stricte."
+    }
+  },
+  "legal": {
+    "header": {
+      "badge": "Cadre Légal & Conformité",
+      "title": "Mentions Légales & Politique de Confidentialité",
+      "updatedAt": "Dernière mise à jour : Juillet 2026 • République Démocratique du Congo"
+    },
+    "sections": {
+      "publisher": {
+        "title": "1. Éditeur du Site",
+        "body": "Le site okapiedge.com est édité par Okapi Edge, établissement d’ingénierie logicielle immatriculé sous le numéro CD/KIN/RCCM/24-B-01492.",
+        "footer": "Siège : Boulevard du 30 Juin, Immeuble Okapi, Gombe, Kinshasa, RDC.\nDirecteur de la Publication : Patrick Mwamba, Président-Directeur Général."
+      },
+      "hosting": {
+        "title": "2. Hébergement & Cloud Souverain",
+        "body": "L’intégralité des données du site et des plateformes SaaS associées (Okapi Edu, Syntix Pharma, Okapi POS, Okapi Hospitals, Okapi FuelOils) est hébergée sur l’infrastructure de cloud souverain opérée par Okapi Edge au sein de datacenters sécurisés."
+      },
+      "data": {
+        "title": "3. Protection des Données Personnelles & e-DGI",
+        "body": "Conformément à la réglementation sur la protection des données à caractère personnel et aux exigences de conformité, Okapi Edge garantit le chiffrement AES-256 de toutes les données sensibles."
+      },
+      "ip": {
+        "title": "4. Propriété Intellectuelle",
+        "body": "L’ensemble des contenus, marques, logos, visuels et architectures logicielles est la propriété exclusive de l’établissement Okapi Edge. Toute reproduction non autorisée constitue une contrefaçon sanctionnée par la loi."
+      }
+    }
+  },
+  "notFound": {
+    "hero": {
+      "eyebrow": "Erreur 404 · Hors Sentier",
+      "title": "Sentier Inexploré.",
+      "description": "Même un Okapi s’aventure parfois hors des pistes. Cette page n’existe pas encore. Retournez au hub.",
+      "cta": "Retourner au Hub Corporate"
+    },
+    "navigation": {
+      "eyebrow": "Navigation",
+      "description": "Vérifiez l’URL ou utilisez le menu pour rejoindre Vision, Écosystème, ou Contact B2B."
+    }
+  },
+  "investorsModal": {
+    "badge": "Espace investisseurs",
+    "title": "Accès confidentiel sous NDA",
+    "subtitle": "Demandez le dossier d’investissement Okapi Edge.",
+    "fields": {
+      "fullName": "Nom complet *",
+      "organization": "Organisation *",
+      "email": "Email *",
+      "phone": "Téléphone",
+      "profile": "Profil",
+      "ticket": "Ticket",
+      "message": "Message"
+    },
+    "profileOptions": {
+      "vcPe": "Fonds VC / Private Equity",
+      "familyOffice": "Family Office",
+      "institutional": "Institutionnel / DFIs",
+      "businessAngel": "Business Angel",
+      "strategic": "Partenaire stratégique"
+    },
+    "ticketOptions": {
+      "tier1": "$100k – $250k",
+      "tier2": "$250k – $1M",
+      "tier3": "$1M – $5M",
+      "tier4": "> $5M"
+    },
+    "nda": {
+      "prefix": "NDA :",
+      "description": "je m’engage à traiter de manière confidentielle les informations transmises."
+    },
+    "confidentiality": "Données traitées de façon confidentielle",
+    "submitCta": "Demander le dossier",
+    "success": {
+      "title": "Demande transmise",
+      "body": "Merci, {name}. Nous recontacterons {organization} sous 24–48 h.",
+      "closeCta": "Fermer"
+    }
+  },
+  "search": {
+    "placeholder": "Rechercher…",
+    "groups": {
+      "platforms": "Plateformes",
+      "articles": "Articles",
+      "careers": "Carrières"
+    },
+    "noResults": "Aucun résultat pour « {query} ». Essayez Edu, POS, Pharma…"
+  },
+  "newsletter": {
+    "confirm": {
+      "success": {
+        "title": "Abonnement confirmé",
+        "description": "Vous êtes maintenant abonné à la newsletter Okapi Edge."
+      },
+      "failure": {
+        "title": "Confirmation impossible",
+        "description": "Ce lien est invalide ou a expiré."
+      }
+    },
+    "unsubscribe": {
+      "success": {
+        "title": "Désabonnement effectué",
+        "description": "Vous ne recevrez plus les newsletters Okapi Edge."
+      },
+      "failure": {
+        "title": "Désabonnement impossible",
+        "description": "Ce lien est invalide ou a expiré."
+      }
+    },
+    "backHome": "Retour à l’accueil"
+  },
+  "products": {
+    "edu": {
+      "name": "Okapi Edu",
+      "subtitle": "Global Next-Gen Learning Operating System",
+      "tagline": "Le SaaS d’infrastructure mondiale pour institutions scolaires et universitaires.",
+      "category": "Éducation & Formation Globale",
+      "description": "Une plateforme unifiée réunissant administration, pédagogie, finance, IA décisionnelle et portails étudiants dans plus de 45 pays.",
+      "fullDescription": "Okapi Edu est la plateforme de gestion éducative mondiale développée par Okapi Edge. Elle orchestre le cycle complet d’apprentissage, de l’inscription multi-devises au bulletin certifié par signature cryptographique, tout en intégrant des passerelles financières internationales et locales (Stripe, SWIFT, Mobile Money).",
+      "badge": "Enterprise Education Suite",
+      "tags": {
+        "aiTracking": "IA Détection & Suivi Académique",
+        "multiCampus": "Multi-Campus International",
+        "multiCurrency": "Paiements Multi-Devises",
+        "edgeOffline": "Edge Synchronisation Offline"
+      },
+      "metrics": {
+        "satisfaction": "Satisfaction Utilisateurs",
+        "efficiency": "Rendement Administratif",
+        "learners": "Étudiants & Élevés Gérés",
+        "availability": "Disponibilité Edge Global"
+      },
+      "features": {
+        "aiAnalytics": {
+          "title": "IA Analytics Académique",
+          "desc": "Analyse comportementale et académique en temps réel pour optimiser le parcours de chaque apprenant."
+        },
+        "financial": {
+          "title": "Moteur Financier Multi-Devises",
+          "desc": "Gestion automatisée des frais, réconciliation bancaire instantanée et conformité fiscale locale."
+        },
+        "multiCampus": {
+          "title": "Gestion Multi-Campus Mondial",
+          "desc": "Supervision globale pour réseaux d’écoles et universités avec règles de souveraineté territoriales."
+        },
+        "studentApp": {
+          "title": "Espace Étudiant & App PWA Native",
+          "desc": "Accès fluide, notifications multilingues et suivi en temps réel sur mobile, web et desktop."
+        }
+      },
+      "detail": {
+        "modulesTitle": "Modules Clés d’Okapi Edu",
+        "portalCta": "Accéder au Portail Okapi Edu"
+      }
+    },
+    "syntix": {
+      "name": "Syntix Pharma",
+      "subtitle": "Global Intelligent Healthcare ERP",
+      "tagline": "L’ERP pharmaceutique international qui sécurise la chaîne logistique et anticipe la demande.",
+      "category": "Santé & Logistique Médicale",
+      "description": "Pilotez vos officines, réseaux de distribution et stocks de santé avec modélisation prédictive, traçabilité Datamatrix et conformité e-DGI / fiscale globale.",
+      "fullDescription": "Syntix Pharma par Okapi Edge est l’ERP de santé de référence internationale. Il sécurise la supply chain des médicaments, assure la traçabilité contre la contrefaçon, anticipe les ruptures de stock grâce à l’IA contextuelle et garantit la conformité fiscale automatisée en temps réel.",
+      "badge": "Global Health Standard",
+      "tags": {
+        "traceability": "Traçabilité Datamatrix / GS1",
+        "invoicing": "Facturation Normalisée Temps Réel",
+        "aiReplenishment": "IA Réapprovisionnement",
+        "offlineEdge": "Offline Edge Synchro"
+      },
+      "metrics": {
+        "compliance": "Conformité Fiscale Temps Réel",
+        "stockouts": "Réduction des Ruptures",
+        "trackedProducts": "Produits Traqués",
+        "expiryLoss": "Pertes Périmés Évitées"
+      },
+      "features": {
+        "invoicing": {
+          "title": "Facturation & Conformité Instantanée",
+          "desc": "Signature cryptographique et télétransmission aux autorités fiscales en moins de 100ms."
+        },
+        "fefo": {
+          "title": "Traçabilité FEFO & Lots Sensibles",
+          "desc": "Gestion First-Expired, First-Out rigoureuse pour bloquer les produits échus et sécuriser la chaîne du froid."
+        },
+        "predictive": {
+          "title": "Intelligence Prédictive de Stock",
+          "desc": "Modèles IA prédisant les pics de demande épidémiques ou saisonniers à l’échelle globale et régionale."
+        },
+        "antiCounterfeit": {
+          "title": "Anti-Contrefaçon Scan GS1",
+          "desc": "Validation instantanée du Datamatrix des produits pharmaceutiques à la réception et à la vente."
+        }
+      },
+      "detail": {
+        "featuresTitle": "Fonctionnalités Métier Syntix Pharma",
+        "portalCta": "Accéder à Syntix Pharma"
+      }
+    },
+    "pos": {
+      "name": "Okapi POS",
+      "subtitle": "Universal Retail Edge Infrastructure",
+      "tagline": "Encaissez, synchronisez et gérez votre commerce mondial sans aucune interruption.",
+      "category": "Retail & Global Commerce",
+      "description": "Une plateforme de point de vente ultra-rapide bâtie en Rust & Tauri, fonctionnant à 100% hors-ligne et synchronisée sur des nœuds cloud mondiaux.",
+      "fullDescription": "Okapi POS redéfinit les systèmes de caisse modernes à l’échelle internationale. Conçu pour résister aux pannes réseau grâce à son moteur Offline-First et sa vitesse d’exécution sub-milliseconde, Okapi POS accepte cartes bancaires, paiements sans contact, crypto-actifs et passerelles mobiles.",
+      "badge": "High-Performance POS",
+      "tags": {
+        "rustEngine": "Moteur Rust / Tauri Ultra-Léger",
+        "syncOffline": "Synchro Multi-Nœuds Offline",
+        "globalInvoicing": "Facturation Globale Unifiée",
+        "multiStore": "Multi-Boutiques & Entrepôts"
+      },
+      "metrics": {
+        "sla": "SLA Edge Availability",
+        "txSpeed": "Vitesse de Transaction",
+        "activePos": "Points de Vente Actifs",
+        "volume": "Volume Annuel Traité"
+      },
+      "features": {
+        "native": {
+          "title": "Exécutable Natif High-Speed",
+          "desc": "Architecture Tauri / Rust légère offrant une fluidité maximale sur tablette, caisse enregistreuse et mobile."
+        },
+        "syncCrdt": {
+          "title": "Synchronisation Offline-First CRDT",
+          "desc": "Les ventes continuent sans Internet. La resynchronisation s’effectue automatiquement dès reconnexion."
+        },
+        "multiStore": {
+          "title": "Gestion Multi-Boutiques & Entrepôts",
+          "desc": "Supervision globale des stocks, transferts inter-sites et bilans financiers en temps réel."
+        },
+        "dynamicFiscal": {
+          "title": "Facturation & Contexte Fiscal Dynamic",
+          "desc": "Adaptation automatique aux taxes locales, TVA, e-DGI et normes comptables internationales."
+        }
+      },
+      "detail": {
+        "featuresTitle": "Moteur de Caisse & Synchro Okapi POS",
+        "portalCta": "Accéder à Okapi POS"
+      }
+    },
+    "hospitals": {
+      "name": "Okapi Hospitals (SIH)",
+      "subtitle": "Système d’Information Hospitalier Intégré",
+      "tagline": "Gérez l’ensemble de vos centres hospitaliers, urgences et dossiers patients informatisés.",
+      "category": "Santé & Ingénierie Hospitalière",
+      "description": "Une solution clé en main pour hôpitaux, cliniques et centres de santé : dossier médical partagé (DMP), gestion des lits, pharmacie hospitalière, imagerie PACS et facturation médicale.",
+      "fullDescription": "Okapi Hospitals (SIH) est la plateforme logicielle de gestion hospitalière conçue pour fluidifier le parcours patient et optimiser les ressources médicales. Du tri aux urgences à la gestion du bloc opératoire et de la pharmacie, Okapi Hospitals garantit un suivi médical précis et la confidentialité absolue des données de santé.",
+      "badge": "Hospital Suite SIH",
+      "tags": {
+        "emr": "Dossier Médical Partagé (DMP)",
+        "beds": "Gestion Hôpital & Lits",
+        "imaging": "Imagerie & PACS",
+        "healthCompliance": "Conformité Données de Santé"
+      },
+      "metrics": {
+        "waitTime": "Temps d’Attente Réduit",
+        "adminEfficiency": "Efficacité Administrative",
+        "patients": "Dossiers Patients Sécurisés",
+        "availability": "Disponibilité Système"
+      },
+      "features": {
+        "emr": {
+          "title": "Dossier Patient Informatisé (DPI)",
+          "desc": "Centralisation de l’historique médical, ordonnances, constantes et comptes-rendus en temps réel."
+        },
+        "beds": {
+          "title": "Gestion des Admissions & Lits",
+          "desc": "Suivi dynamique de l’occupation des chambres, plannings de garde et transferts inter-services."
+        },
+        "pharmacy": {
+          "title": "Pharmacie Hospitalière & Stocks",
+          "desc": "Gestion précise du stock de médicaments, traçabilité des consommables et alertes de péremption."
+        },
+        "billing": {
+          "title": "Facturation & Prise en Charge",
+          "desc": "Intégration directe avec les assurances, mutuelles et passerelles fiscales pour une facturation simplifiée."
+        }
+      },
+      "detail": {
+        "featuresTitle": "Modules & Capacités du SIH Okapi Hospitals",
+        "portalCta": "Accéder à Okapi Hospitals (SIH)"
+      }
+    },
+    "fueloils": {
+      "name": "Okapi FuelOils",
+      "subtitle": "Downstream Oil & Fuel Management Platform",
+      "tagline": "Pilotez vos réseaux de stations-services, volucompteurs et dépôts pétroliers.",
+      "category": "Énergie & Distribution Pétrolière",
+      "description": "Solution globale pour la distribution de carburants : télémesure des cuves en temps réel, gestion des cartes carburant, automatisation des pompes et contrôle anti-fraude.",
+      "fullDescription": "Okapi FuelOils est la plateforme dédiée aux distributeurs de produits pétroliers et réseaux de stations-services. Elle interconnecte les pistolets de distribution, les jauges de cuves et les systèmes d’encaissement pour offrir une visibilité totale sur les flux de carburant, prévenir les coullages et simplifier la comptabilité.",
+      "badge": "Energy Distribution OS",
+      "tags": {
+        "telemetry": "Télémesure Cuves",
+        "fleetCards": "Cartes Flotte & Prépayé",
+        "pumpAutomation": "Automatisation Pompes",
+        "customs": "Contrôle Douanier & Fiscal"
+      },
+      "metrics": {
+        "lossReduction": "Réduction des Pertes/Coullages",
+        "stations": "Stations Connectées",
+        "volume": "Volume Carburant Suivi",
+        "gaugingPrecision": "Précision Téléjaugeage"
+      },
+      "features": {
+        "telemetry": {
+          "title": "Télémesure & Jaugeage des Cuves",
+          "desc": "Surveillance continue des niveaux de carburant et détection automatique des fuites ou anomalies."
+        },
+        "fleet": {
+          "title": "Gestion de Cartes Flotte & Prépayé",
+          "desc": "SaaS de gestion des cartes d’entreprise avec plafonds, restrictions horaires et géofencing."
+        },
+        "pumps": {
+          "title": "Automatisation des Volucompteurs",
+          "desc": "Connexion directe aux pompes pour un enregistrement automatique de chaque transaction sans saisie manuelle."
+        },
+        "multiStation": {
+          "title": "Supervision Multi-Stations",
+          "desc": "Tableau de bord centralisé pour analyser les ventes, stocks et marges de l’ensemble du réseau."
+        }
+      },
+      "detail": {
+        "featuresTitle": "Plateforme & Modules Okapi FuelOils",
+        "portalCta": "Accéder à Okapi FuelOils"
+      }
+    }
+  }
 }

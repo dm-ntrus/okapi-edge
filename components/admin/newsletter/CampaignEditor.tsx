@@ -152,14 +152,14 @@ export function CampaignEditor({
               disabled={isSent}
             />
           </Field>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Field label="Langue contenu" htmlFor="locale">
               <select
                 id="locale"
                 value={locale}
                 disabled={isSent}
                 onChange={(e) => setLocale(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-[var(--oe-border)] bg-[var(--oe-bg)] px-3 text-sm"
+                className="oe-admin-input"
               >
                 <option value="fr">FR</option>
                 <option value="en">EN</option>
@@ -171,7 +171,7 @@ export function CampaignEditor({
                 value={audience}
                 disabled={isSent}
                 onChange={(e) => setAudience(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-[var(--oe-border)] bg-[var(--oe-bg)] px-3 text-sm"
+                className="oe-admin-input"
               >
                 <option value="all_active">Tous les actifs</option>
                 <option value="locale">Par langue</option>
@@ -186,7 +186,7 @@ export function CampaignEditor({
                 value={audienceLocale}
                 disabled={isSent}
                 onChange={(e) => setAudienceLocale(e.target.value)}
-                className="flex h-10 w-full rounded-md border border-[var(--oe-border)] bg-[var(--oe-bg)] px-3 text-sm"
+                className="oe-admin-input"
               >
                 <option value="fr">FR</option>
                 <option value="en">EN</option>

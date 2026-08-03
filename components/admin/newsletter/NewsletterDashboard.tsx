@@ -76,7 +76,7 @@ export function NewsletterDashboard({
       </div>
 
       <Card>
-        <CardHeader className="flex-row items-center justify-between space-y-0">
+        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between space-y-0">
           <div>
             <CardTitle>Campagnes récentes</CardTitle>
             <CardDescription>Dernières newsletters créées ou envoyées.</CardDescription>

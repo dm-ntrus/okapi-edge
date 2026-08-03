@@ -1,16 +1,13 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { HomePage } from '@/components/pages/HomePage';
 import { getDynamicProducts } from '@/lib/content/dynamic';
+import { buildPageMetadata } from '@/lib/i18n/metadata';
 
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: undefined });
-  return {
-    title: t('meta_home_title'),
-    description: t('meta_home_description'),
-  };
+  return buildPageMetadata(locale, 'home', '/');
 }
 
 export default async function Page({ params }: Props) {

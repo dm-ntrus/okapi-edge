@@ -1,14 +1,13 @@
 import { setRequestLocale } from 'next-intl/server';
 import { CareersPage } from '@/components/pages/CareersPage';
 import { getDynamicJobs } from '@/lib/content/dynamic';
+import { buildPageMetadata } from '@/lib/i18n/metadata';
 
 type Props = { params: Promise<{ locale: string }> };
 
-export async function generateMetadata() {
-  return {
-    title: 'Carrières',
-    description: 'Rejoignez les équipes ingénierie et produit d’Okapi Edge.',
-  };
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  return buildPageMetadata(locale, 'careers', '/careers');
 }
 
 export default async function Page({ params }: Props) {

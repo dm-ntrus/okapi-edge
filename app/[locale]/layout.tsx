@@ -3,7 +3,10 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/lib/i18n/routing';
+import { getLocaleDir } from '@/lib/i18n/config';
+import { getSiteContact } from '@/lib/content/dynamic';
 import { SiteShell } from '@/components/layout/SiteShell';
+import { DocumentLocale } from '@/components/layout/DocumentLocale';
 
 type Props = {
   children: React.ReactNode;
@@ -22,13 +25,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages();
+  const [messages, contact] = await Promise.all([getMessages(), getSiteContact(locale)]);
+  const dir = getLocaleDir(locale);
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <div lang={locale}>
+      <DocumentLocale locale={locale} />
+      <div lang={locale} dir={dir} className="min-h-dvh">
         <Suspense fallback={null}>
-          <SiteShell>{children}</SiteShell>
+          <SiteShell contact={contact}>{children}</SiteShell>
         </Suspense>
       </div>
     </NextIntlClientProvider>

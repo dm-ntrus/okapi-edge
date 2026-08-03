@@ -81,7 +81,7 @@ function wrapHtml(opts: {
         <tr><td style="padding:0 28px 28px;">
           ${unsub}
           <p style="margin:12px 0 0;font-size:11px;color:#8a7a6a;text-align:center;">
-            © ${new Date().getFullYear()} Okapi Edge Inc.
+            © ${new Date().getFullYear()} Okapi Edge.
           </p>
         </td></tr>
       </table>

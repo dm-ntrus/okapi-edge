@@ -1,21 +1,35 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import type { SiteContact } from '@/types';
 import { PageHero } from '@/components/ui/PageHero';
 import { Container, Section } from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { Mail, MapPin, Phone, Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 
-const FIELD_CLASS =
-  'w-full rounded-[var(--oe-radius)] border border-[var(--oe-border)] bg-[var(--oe-bg)] px-3.5 py-2.5 text-sm text-[var(--oe-text)] placeholder:text-[var(--oe-text-muted)] focus:border-[var(--oe-accent)]/50 focus:outline-none';
+const FIELD_CLASS = 'oe-field';
 
-export const ContactB2bPage: React.FC = () => {
-  const [formData, setFormData] = useState({
+const INTEREST_OPTIONS = ['edu', 'syntix', 'pos', 'sovereign'] as const;
+type InterestId = (typeof INTEREST_OPTIONS)[number];
+
+export function ContactB2bPage({ contact }: { contact: SiteContact }) {
+  const t = useTranslations('contact');
+  const tc = useTranslations('common');
+
+  const [formData, setFormData] = useState<{
+    name: string;
+    organization: string;
+    email: string;
+    phone: string;
+    serviceInterest: InterestId;
+    message: string;
+  }>({
     name: '',
     organization: '',
     email: '',
     phone: '',
-    serviceInterest: 'Okapi Edu (Scolaire)',
+    serviceInterest: 'edu',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
@@ -29,11 +43,11 @@ export const ContactB2bPage: React.FC = () => {
       organization: formData.organization,
       email: formData.email,
       phone: formData.phone || undefined,
-      interest: formData.serviceInterest,
+      interest: t(`form.interestOptions.${formData.serviceInterest}`),
       message: formData.message,
     });
     if (!result.ok) {
-      alert(result.error ?? 'Envoi impossible');
+      alert(result.error ?? tc('errors.sendFailed'));
       return;
     }
     setSubmitted(true);
@@ -46,7 +60,7 @@ export const ContactB2bPage: React.FC = () => {
       organization: '',
       email: '',
       phone: '',
-      serviceInterest: 'Okapi Edu (Scolaire)',
+      serviceInterest: 'edu',
       message: '',
     });
   };
@@ -54,87 +68,84 @@ export const ContactB2bPage: React.FC = () => {
   return (
     <div className="w-full bg-[var(--oe-bg)]">
       <PageHero
-        eyebrow="Canal Partenariats & B2B"
-        title="Initier un Partenariat d'Infrastructure"
-        description="Échangez directement avec les stratèges d'Okapi Edge pour déployer nos plateformes applicatives dans votre institution."
+        eyebrow={t('hero.eyebrow')}
+        title={t('hero.title')}
+        description={t('hero.description')}
       />
 
       <Section className="bg-[var(--oe-bg)] border-b-0">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-6 md:p-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+            <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-7 md:p-8">
               {submitted ? (
                 <div className="py-10 text-center">
                   <CheckCircle2 className="mx-auto mb-4 h-10 w-10 text-[var(--oe-success)]" />
                   <h3 className="font-heading text-xl font-semibold text-[var(--oe-text)] mb-2">
-                    Signal reçu par le Quartier Général.
+                    {t('success.title')}
                   </h3>
                   <p className="mx-auto max-w-md text-sm text-[var(--oe-text-secondary)] leading-relaxed">
-                    Votre message est important. Un stratège vous répond dans les 48h. Ce n&apos;est
-                    pas une réponse automatique, c&apos;est le début d&apos;une conversation.
+                    {t('success.description')}
                   </p>
                   <div className="mt-6">
-                    <Button type="button" variant="secondary" onClick={resetForm}>
-                      Envoyer une autre demande
+                    <Button type="button" variant="secondary" className="w-full sm:w-auto" onClick={resetForm}>
+                      {t('success.resetCta')}
                     </Button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <Field
-                    label="Nom complet *"
+                    label={t('form.nameLabel')}
                     required
-                    placeholder="Nom & Prénom"
+                    placeholder={t('form.namePlaceholder')}
                     value={formData.name}
                     onChange={(v) => setFormData((s) => ({ ...s, name: v }))}
                   />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Field
-                      label="Organisation / Institution *"
+                      label={t('form.organizationLabel')}
                       required
-                      placeholder="Ministère, Université, Pharmacie..."
+                      placeholder={t('form.organizationPlaceholder')}
                       value={formData.organization}
                       onChange={(v) => setFormData((s) => ({ ...s, organization: v }))}
                     />
                     <div>
                       <label className="mb-2 block text-sm text-[var(--oe-text-secondary)]">
-                        Domaine d&apos;Intérêt
+                        {t('form.interestLabel')}
                       </label>
                       <select
                         value={formData.serviceInterest}
                         onChange={(e) =>
-                          setFormData((s) => ({ ...s, serviceInterest: e.target.value }))
+                          setFormData((s) => ({
+                            ...s,
+                            serviceInterest: e.target.value as InterestId,
+                          }))
                         }
                         className={FIELD_CLASS}
                       >
-                        <option value="Okapi Edu (Scolaire)">Okapi Edu (Scolaire & Univ)</option>
-                        <option value="Syntix Pharma (Pharmacie & e-DGI)">
-                          Syntix Pharma (Pharmacie & e-DGI)
-                        </option>
-                        <option value="Okapi POS (Commerce & Caisse)">
-                          Okapi POS (Commerce & Caisse)
-                        </option>
-                        <option value="Cloud Souverain & Sur-mesure">
-                          Cloud Souverain & Sur-mesure
-                        </option>
+                        {INTEREST_OPTIONS.map((id) => (
+                          <option key={id} value={id}>
+                            {t(`form.interestOptions.${id}`)}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Field
-                      label="Email professionnel *"
+                      label={t('form.emailLabel')}
                       type="email"
                       required
-                      placeholder="nom@institution.cd"
+                      placeholder={t('form.emailPlaceholder')}
                       value={formData.email}
                       onChange={(v) => setFormData((s) => ({ ...s, email: v }))}
                     />
                     <Field
-                      label="Téléphone / WhatsApp"
+                      label={t('form.phoneLabel')}
                       type="tel"
-                      placeholder="+243..."
+                      placeholder={t('form.phonePlaceholder')}
                       value={formData.phone}
                       onChange={(v) => setFormData((s) => ({ ...s, phone: v }))}
                     />
@@ -142,12 +153,12 @@ export const ContactB2bPage: React.FC = () => {
 
                   <div>
                     <label className="mb-2 block text-sm text-[var(--oe-text-secondary)]">
-                      Message ou projet *
+                      {t('form.messageLabel')}
                     </label>
                     <textarea
                       rows={4}
                       required
-                      placeholder="Précisez la taille de votre réseau ou vos objectifs d'intégration..."
+                      placeholder={t('form.messagePlaceholder')}
                       value={formData.message}
                       onChange={(e) => setFormData((s) => ({ ...s, message: e.target.value }))}
                       className={`${FIELD_CLASS} resize-none`}
@@ -156,48 +167,72 @@ export const ContactB2bPage: React.FC = () => {
 
                   <Button type="submit" className="w-full sm:w-auto">
                     <Send className="h-4 w-4" />
-                    Entrer en Contact
+                    {t('form.submitCta')}
                   </Button>
 
                   <p className="text-[11px] text-[var(--oe-text-muted)] pt-1">
-                    Communications confidentielles. Données scellées à Kinshasa.
+                    {t('form.footnote')}
                   </p>
                 </form>
               )}
             </div>
 
             <div className="space-y-5">
-              <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-7 md:p-8 space-y-6">
+              <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-5 sm:p-7 md:p-8 space-y-6">
                 <h3 className="font-heading text-xl font-semibold text-[var(--oe-text)] tracking-tight">
-                  Quartier Général Kinshasa
+                  {contact.hqTitle || t('hq.title')}
                 </h3>
 
                 <div className="space-y-5 text-sm text-[var(--oe-text-secondary)]">
                   <div className="flex items-start gap-3">
                     <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--oe-accent)]" />
                     <div>
-                      <p className="font-medium text-[var(--oe-text)] mb-1">Adresse Physique</p>
-                      Boulevard du 30 Juin, Immeuble Okapi, 4ème étage
+                      <p className="font-medium text-[var(--oe-text)] mb-1">
+                        {t('hq.addressLabel')}
+                      </p>
+                      {contact.addressLine1}
                       <br />
-                      Commune de la Gombe, Kinshasa, RDC
+                      {contact.addressLine2}
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--oe-accent)]" />
                     <div>
-                      <p className="font-medium text-[var(--oe-text)] mb-1">Email Général</p>
-                      <span className="font-mono text-[var(--oe-accent)]">
-                        contact@okapi-group.cd
-                      </span>
+                      <p className="font-medium text-[var(--oe-text)] mb-1">
+                        {t('hq.emailLabel')}
+                      </p>
+                      <a
+                        href={`mailto:${contact.email}`}
+                        className="font-mono text-[var(--oe-accent)] break-all hover:underline"
+                      >
+                        {contact.email}
+                      </a>
+                      {contact.salesEmail && contact.salesEmail !== contact.email ? (
+                        <p className="mt-1.5 text-xs text-[var(--oe-text-muted)]">
+                          <a
+                            href={`mailto:${contact.salesEmail}`}
+                            className="font-mono text-[var(--oe-accent)] hover:underline"
+                          >
+                            {contact.salesEmail}
+                          </a>
+                        </p>
+                      ) : null}
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--oe-accent)]" />
                     <div>
-                      <p className="font-medium text-[var(--oe-text)] mb-1">Ligne Directe B2B</p>
-                      <span className="font-mono text-[var(--oe-accent)]">+243 81 900 0000</span>
+                      <p className="font-medium text-[var(--oe-text)] mb-1">
+                        {t('hq.phoneLabel')}
+                      </p>
+                      <a
+                        href={`tel:${contact.phone.replace(/\s+/g, '')}`}
+                        className="font-mono text-[var(--oe-accent)] hover:underline"
+                      >
+                        {contact.phone}
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -206,12 +241,19 @@ export const ContactB2bPage: React.FC = () => {
               <div className="rounded-[var(--oe-radius-lg)] border border-[var(--oe-border)] bg-[var(--oe-surface)] p-6">
                 <div className="mb-2 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--oe-accent)]">
                   <ShieldCheck className="h-3.5 w-3.5" />
-                  <span>Standard de Sécurité ISO & e-DGI</span>
+                  <span>{t('security.badge')}</span>
                 </div>
                 <p className="text-sm text-[var(--oe-text-secondary)] leading-relaxed">
-                  Tous les échanges d&apos;information entre votre institution et Okapi Edge sont
-                  régis par nos protocoles de confidentialité stricte.
+                  {t('security.description')}
                 </p>
+                {contact.securityEmail ? (
+                  <a
+                    href={`mailto:${contact.securityEmail}`}
+                    className="mt-3 inline-flex font-mono text-xs text-[var(--oe-accent)] hover:underline"
+                  >
+                    {contact.securityEmail}
+                  </a>
+                ) : null}
               </div>
             </div>
           </div>

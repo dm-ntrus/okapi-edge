@@ -171,7 +171,7 @@ export function PostsCrud({ posts, dbOk }: { posts: AdminPost[]; dbOk: boolean }
                   id="locale"
                   name="locale"
                   defaultValue={editing?.locale ?? 'fr'}
-                  className="flex h-10 w-full rounded-md border border-[var(--oe-border)] bg-[var(--oe-bg)] px-3 text-sm"
+                  className="oe-admin-input"
                 >
                   <option value="fr">Français</option>
                   <option value="en">English</option>
