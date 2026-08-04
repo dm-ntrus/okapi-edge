@@ -1,8 +1,10 @@
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { OkapiPosDetailPage } from '@/components/pages/OkapiPosDetailPage';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { getDynamicProduct } from '@/lib/content/dynamic';
 import { buildProductMetadata } from '@/lib/i18n/metadata';
+import { breadcrumbSchema, softwareApplicationSchema } from '@/lib/seo/schema';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -16,5 +18,19 @@ export default async function Page({ params }: Props) {
   setRequestLocale(locale);
   const product = await getDynamicProduct('okapi-pos', locale);
   if (!product) notFound();
-  return <OkapiPosDetailPage product={product} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          softwareApplicationSchema(locale, product),
+          breadcrumbSchema(locale, [
+            { name: 'Home', path: '/' },
+            { name: 'Ecosystem', path: '/ecosystem' },
+            { name: product.name, path: '/ecosystem/pos' },
+          ]),
+        ]}
+      />
+      <OkapiPosDetailPage product={product} />
+    </>
+  );
 }

@@ -5,8 +5,11 @@ export type AdminRecord = {
   id: string;
   email: string;
   name: string;
-  password_hash: string;
+  /** Null/absent for SSO-only accounts */
+  password_hash?: string | null;
   role: AdminRole;
+  sso_issuer?: string | null;
+  sso_subject?: string | null;
   created_at?: string;
   updated_at?: string;
 };

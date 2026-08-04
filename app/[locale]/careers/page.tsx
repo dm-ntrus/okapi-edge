@@ -1,7 +1,9 @@
 import { setRequestLocale } from 'next-intl/server';
 import { CareersPage } from '@/components/pages/CareersPage';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { getDynamicJobs } from '@/lib/content/dynamic';
 import { buildPageMetadata } from '@/lib/i18n/metadata';
+import { breadcrumbSchema, jobPostingSchema } from '@/lib/seo/schema';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -14,5 +16,18 @@ export default async function Page({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const jobs = await getDynamicJobs(locale);
-  return <CareersPage jobs={jobs} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          breadcrumbSchema(locale, [
+            { name: 'Home', path: '/' },
+            { name: 'Careers', path: '/careers' },
+          ]),
+          ...jobs.slice(0, 20).map((job) => jobPostingSchema(locale, job)),
+        ]}
+      />
+      <CareersPage jobs={jobs} />
+    </>
+  );
 }

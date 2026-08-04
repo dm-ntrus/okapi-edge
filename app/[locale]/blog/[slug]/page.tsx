@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { BlogPostPage } from '@/components/pages/BlogPostPage';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { getDynamicPost, getDynamicPosts } from '@/lib/content/dynamic';
 import { buildBlogPostMetadata } from '@/lib/i18n/metadata';
+import { blogPostingSchema, breadcrumbSchema } from '@/lib/seo/schema';
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -23,5 +25,19 @@ export default async function Page({ params }: Props) {
   setRequestLocale(locale);
   const post = await getDynamicPost(slug, locale);
   if (!post) notFound();
-  return <BlogPostPage post={post} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          blogPostingSchema(locale, post),
+          breadcrumbSchema(locale, [
+            { name: 'Home', path: '/' },
+            { name: 'Blog', path: '/blog' },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]),
+        ]}
+      />
+      <BlogPostPage post={post} />
+    </>
+  );
 }

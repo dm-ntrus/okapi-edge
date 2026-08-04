@@ -1,28 +1,31 @@
 'use server';
 
 import bcrypt from 'bcryptjs';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { getDb, isDbConfigured, withDb } from '@/lib/db/client';
 import { createIn, q } from '@/lib/db/ops';
 import type { AdminRecord } from '@/lib/db/types';
 import { recordId } from '@/lib/db/types';
-import {
-  SESSION_COOKIE,
-  SESSION_TTL_SECONDS,
-  createSessionToken,
-  getSession,
-} from '@/lib/auth/session';
+import { clearSessionCookie, establishSession } from '@/lib/auth/establish';
+import { safeAdminNextPath } from '@/lib/auth/redirect';
+import { getSession } from '@/lib/auth/session';
+import { getSsoConfig } from '@/lib/auth/sso/config';
 
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
+  next: z.string().optional(),
 });
 
 export type AuthState = { error?: string; ok?: boolean };
 
 export async function loginAction(_prev: AuthState, formData: FormData): Promise<AuthState> {
+  const sso = getSsoConfig();
+  if (sso.enabled && !sso.passwordLoginEnabled) {
+    return { error: 'La connexion par mot de passe est désactivée. Utilisez le SSO.' };
+  }
+
   if (!isDbConfigured()) {
     return { error: 'Base de données non configurée (SURREAL_URL).' };
   }
@@ -30,6 +33,7 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
   const parsed = loginSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
+    next: formData.get('next') || undefined,
   });
 
   if (!parsed.success) {
@@ -37,6 +41,7 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
   }
 
   const { email, password } = parsed.data;
+  const next = safeAdminNextPath(parsed.data.next);
 
   try {
     const db = await getDb();
@@ -47,7 +52,11 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
     );
     const admin = rows?.[0];
     if (!admin?.password_hash) {
-      return { error: 'Identifiants incorrects.' };
+      return {
+        error: admin?.sso_subject
+          ? 'Ce compte utilise le SSO. Connectez-vous via votre fournisseur d’identité.'
+          : 'Identifiants incorrects.',
+      };
     }
 
     const valid = await bcrypt.compare(password, admin.password_hash);
@@ -55,23 +64,14 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
       return { error: 'Identifiants incorrects.' };
     }
 
-    const token = await createSessionToken({
+    await establishSession({
       sub: recordId(admin.id),
       email: admin.email,
       name: admin.name,
       role: admin.role,
     });
 
-    const jar = await cookies();
-    jar.set(SESSION_COOKIE, token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-      path: '/',
-      maxAge: SESSION_TTL_SECONDS,
-    });
-
-    redirect('/admin');
+    redirect(next);
   } catch (error) {
     if (error && typeof error === 'object' && 'digest' in error) {
       throw error;
@@ -82,8 +82,7 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
 }
 
 export async function logoutAction() {
-  const jar = await cookies();
-  jar.delete(SESSION_COOKIE);
+  await clearSessionCookie();
   redirect('/admin/login');
 }
 
@@ -106,6 +105,8 @@ export async function ensureOwnerExists() {
       name,
       password_hash,
       role: 'owner',
+      sso_issuer: null,
+      sso_subject: null,
     });
 
     return { created: true, email };

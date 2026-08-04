@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { SITE_URL } from '@/lib/constants';
+import { SITE_NAME, SITE_URL } from '@/lib/constants';
 import { routing, type Locale } from './routing';
 import { isLocale } from './config';
 
@@ -19,8 +19,19 @@ type MetaPage =
 
 type ProductMetaKey = 'edu' | 'syntix' | 'pos' | 'hospitals' | 'fueloils';
 
+const OG_IMAGE = {
+  url: `${SITE_URL}/opengraph-image`,
+  width: 1200,
+  height: 630,
+  alt: SITE_NAME,
+};
+
 function asLocale(locale: string): Locale {
   return isLocale(locale) ? locale : routing.defaultLocale;
+}
+
+function ogLocale(locale: string) {
+  return locale === 'en' ? 'en_US' : 'fr_FR';
 }
 
 /** Build absolute localized path, e.g. `/fr/about`. */
@@ -44,27 +55,49 @@ export function buildLocaleAlternates(locale: string, path = ''): Metadata['alte
   };
 }
 
+function socialFields(title: string, description: string, locale: string, path: string): Pick<
+  Metadata,
+  'openGraph' | 'twitter'
+> {
+  const url = `${SITE_URL}${localePath(locale, path)}`;
+  return {
+    openGraph: {
+      title,
+      description,
+      locale: ogLocale(locale),
+      alternateLocale: routing.locales
+        .filter((l) => l !== locale)
+        .map((l) => ogLocale(l)),
+      url,
+      siteName: SITE_NAME,
+      type: 'website',
+      images: [OG_IMAGE],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [OG_IMAGE.url],
+    },
+  };
+}
+
 export async function buildPageMetadata(
   locale: string,
   page: MetaPage,
   path = '',
 ): Promise<Metadata> {
   const t = await getTranslations({ locale: asLocale(locale), namespace: 'meta' });
+  const title = t(`${page}.title`);
+  const description = t(`${page}.description`);
+  const social = socialFields(title, description, locale, path);
+
   return {
-    title: t(`${page}.title`),
-    description: t(`${page}.description`),
+    // Home title already includes the brand — avoid "Brand | Brand"
+    title: page === 'home' ? { absolute: title } : title,
+    description,
     alternates: buildLocaleAlternates(locale, path),
-    openGraph: {
-      title: t(`${page}.title`),
-      description: t(`${page}.description`),
-      locale: locale === 'en' ? 'en_US' : 'fr_FR',
-      alternateLocale: routing.locales
-        .filter((l) => l !== locale)
-        .map((l) => (l === 'en' ? 'en_US' : 'fr_FR')),
-      url: `${SITE_URL}${localePath(locale, path)}`,
-      siteName: 'Okapi Edge',
-      type: 'website',
-    },
+    ...social,
   };
 }
 
@@ -74,30 +107,39 @@ export async function buildProductMetadata(
   path: string,
 ): Promise<Metadata> {
   const t = await getTranslations({ locale: asLocale(locale), namespace: 'meta' });
+  const title = t(`products.${product}.title`);
+  const description = t(`products.${product}.description`);
   return {
-    title: t(`products.${product}.title`),
-    description: t(`products.${product}.description`),
+    title,
+    description,
     alternates: buildLocaleAlternates(locale, path),
-    openGraph: {
-      title: t(`products.${product}.title`),
-      description: t(`products.${product}.description`),
-      locale: locale === 'en' ? 'en_US' : 'fr_FR',
-      url: `${SITE_URL}${localePath(locale, path)}`,
-      siteName: 'Okapi Edge',
-      type: 'website',
-    },
+    ...socialFields(title, description, locale, path),
   };
 }
 
 export async function buildBlogPostMetadata(
   locale: string,
   slug: string,
-  post?: { title?: string; excerpt?: string } | null,
+  post?: {
+    title?: string;
+    excerpt?: string;
+    image?: string;
+    author?: string;
+    date?: string;
+    seo_title?: string | null;
+    seo_description?: string | null;
+  } | null,
 ): Promise<Metadata> {
   const t = await getTranslations({ locale: asLocale(locale), namespace: 'meta' });
-  const title = post?.title || t('blogPost.fallbackTitle');
-  const description = post?.excerpt || t('blog.description');
+  const title = post?.seo_title || post?.title || t('blogPost.fallbackTitle');
+  const description = post?.seo_description || post?.excerpt || t('blog.description');
   const path = `/blog/${slug}`;
+  const url = `${SITE_URL}${localePath(locale, path)}`;
+  const imageUrl = post?.image
+    ? post.image.startsWith('http')
+      ? post.image
+      : `${SITE_URL}${post.image}`
+    : OG_IMAGE.url;
 
   return {
     title,
@@ -106,10 +148,22 @@ export async function buildBlogPostMetadata(
     openGraph: {
       title,
       description,
-      locale: locale === 'en' ? 'en_US' : 'fr_FR',
-      url: `${SITE_URL}${localePath(locale, path)}`,
-      siteName: 'Okapi Edge',
+      locale: ogLocale(locale),
+      alternateLocale: routing.locales
+        .filter((l) => l !== locale)
+        .map((l) => ogLocale(l)),
+      url,
+      siteName: SITE_NAME,
       type: 'article',
+      publishedTime: post?.date,
+      authors: post?.author ? [post.author] : undefined,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [imageUrl],
     },
   };
 }
